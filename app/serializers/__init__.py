@@ -1,1 +1,1 @@
-from PredictSerializer import PredictSerializer
+from .PredictSerializer import PredictSerializer

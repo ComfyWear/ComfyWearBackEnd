@@ -1,1 +1,2 @@
-from PredictViewSet import
+from .PredictViewSet import PredictViewSet
+from .KidbrightViewSet import KidbrightViewSet

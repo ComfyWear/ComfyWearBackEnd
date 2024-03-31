@@ -1,7 +1,5 @@
-from django.urls import path
-
-from .views import
+from django.urls import include, path
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("api/", include("app.api_router", namespace="api")),
 ]
