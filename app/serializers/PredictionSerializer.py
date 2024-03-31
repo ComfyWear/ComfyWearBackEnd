@@ -1,10 +1,10 @@
 """The module defines the serializer for the Task model."""
 from rest_framework import serializers
 
-from app.models import Predict
+from app.models import Prediction
 
 
-class PredictSerializer(serializers.ModelSerializer):
+class PredictionSerializer(serializers.ModelSerializer):
     """
     Serializer for the Task model.
 
@@ -15,5 +15,5 @@ class PredictSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta definition for Task."""
 
-        model = Predict
+        model = Prediction
         fields = "__all__"

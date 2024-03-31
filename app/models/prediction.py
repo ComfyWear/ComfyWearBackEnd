@@ -3,7 +3,7 @@ from django.db import models
 from utils.abstract_model import AbstractModel
 
 
-class Predict(AbstractModel):
+class Prediction(AbstractModel):
     """
     Represents a prediction in the system.
 

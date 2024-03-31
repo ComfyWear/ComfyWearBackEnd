@@ -1,7 +1,7 @@
 """A module that defines the PredictViewSet class."""
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-from app.serializers import PredictSerializer
+from app.serializers import PredictionSerializer
 
 
 class PredictViewSet(viewsets.ViewSet):
@@ -14,7 +14,7 @@ class PredictViewSet(viewsets.ViewSet):
         :param request: The HTTP request with prediction data.
         :return: Response with created prediction or error.
         """
-        serializer = PredictSerializer(data=request.data)
+        serializer = PredictionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
