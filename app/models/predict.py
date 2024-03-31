@@ -1,10 +1,9 @@
 from django.db import models
-import uuid
 
 from utils.abstract_model import AbstractModel
 
 
-class Prediction(AbstractModel):
+class Predict(AbstractModel):
     """
     Represents a prediction in the system.
 
