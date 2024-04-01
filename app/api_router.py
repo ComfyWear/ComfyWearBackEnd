@@ -1,7 +1,7 @@
 from django.conf import settings
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
-from app.views import PredictViewSet, KidbrightViewSet
+from app.views import PredictViewSet, SensorViewSet
 
 
 if settings.DEBUG:
@@ -10,7 +10,7 @@ else:
     router = SimpleRouter()
 
 router.register("predict", PredictViewSet, basename="predict")
-router.register("sensor", KidbrightViewSet, basename="sensor")
+router.register("sensor", SensorViewSet, basename="sensor")
 
 app_name = "api"
 urlpatterns = router.urls

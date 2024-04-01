@@ -2,7 +2,7 @@
 from rest_framework import viewsets
 
 
-class KidbrightViewSet(viewsets.ViewSet):
+class SensorViewSet(viewsets.ViewSet):
     """ViewSet for handling Kidbright-related operations."""
 
     def create(self, request):
