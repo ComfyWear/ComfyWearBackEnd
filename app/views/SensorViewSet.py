@@ -1,7 +1,7 @@
-"""A module that defines the KidbrightViewSet class."""
+"""A module that defines the SensorViewSet class."""
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-from app.serializers.SensorSerializer import SensorSerializer
+from app.serializers import SensorSerializer
 
 
 class SensorViewSet(viewsets.ViewSet):
@@ -9,7 +9,7 @@ class SensorViewSet(viewsets.ViewSet):
 
     def create(self, request):
         """
-        Create a new Task object for a specific user.
+        Create a new Sensor object for a specific user.
 
         :param request: The HTTP request with task data.
         :return: Response with created task or error.
