@@ -11,8 +11,6 @@ class Integration(AbstractModel):
     This model inherits from the AbstractModel and contains an auto-generated
     UUID as a primary key and foreign keys to the Sensor, Prediction, and Image models.
 
-    :param id: The UUID of the integrated data, auto-generated upon creation.
-    :type id: models.UUIDField
     :param sensor: The associated sensor data.
     :type sensor: models.ForeignKey
     :param prediction: The associated prediction data.

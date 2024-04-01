@@ -12,8 +12,6 @@ class Image(AbstractModel):
     auto-generated UUID as a primary key and an image field
     for storing detected images.
 
-    :param id: The UUID of the image, auto-generated upon creation.
-    :type id: models.UUIDField
     :param detected_image: The field for storing the uploaded image.
     :type detected_image: models.ImageField
 

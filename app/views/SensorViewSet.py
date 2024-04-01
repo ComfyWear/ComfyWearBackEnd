@@ -1,15 +1,23 @@
 """A module that defines the KidbrightViewSet class."""
-from rest_framework import viewsets
+from rest_framework import status, viewsets
+from rest_framework.response import Response
+from app.serializers.SensorSerializer import SensorSerializer
 
 
 class SensorViewSet(viewsets.ViewSet):
-    """ViewSet for handling Kidbright-related operations."""
+    """ViewSet for handling Sensor-related operations."""
 
     def create(self, request):
         """
-        Create a new Kidbright object.
+        Create a new Task object for a specific user.
 
-        :param request: The HTTP request with Kidbright data.
-        :return: Response with created Kidbright object or error.
+        :param request: The HTTP request with task data.
+        :return: Response with created task or error.
         """
-        pass
+
+        data = request.data
+        serializer = SensorSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
