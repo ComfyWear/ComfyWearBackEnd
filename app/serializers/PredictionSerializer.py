@@ -1,4 +1,4 @@
-"""The module defines the serializer for the Task model."""
+"""The module defines the serializer for the Prediction model."""
 from rest_framework import serializers
 
 from app.models import Prediction
@@ -6,9 +6,9 @@ from app.models import Prediction
 
 class PredictionSerializer(serializers.ModelSerializer):
     """
-    Serializer for the Task model.
+    Serializer for the Prediction model.
 
-    Handles the conversion of Task model instances to JSON format and
+    Handles the conversion of Prediction model instances to JSON format and
     vice versa, simplifying the process of transmitting Task data over APIs.
     """
 
