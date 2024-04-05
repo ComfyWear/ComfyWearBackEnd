@@ -2,6 +2,7 @@ from django.db import models
 
 
 from utils.abstract_model import AbstractModel
+from app.models.integration import Integration
 
 
 class Image(AbstractModel):
@@ -14,10 +15,15 @@ class Image(AbstractModel):
 
     :param detected_image: The field for storing the uploaded image.
     :type detected_image: models.ImageField
+    :param integration: The foreign key to the associated integration.
+    :type integration: models.ForeignKey
 
     :return: A string representation of the image UUID.
     :rtype: str
     """
+    integration = models.ForeignKey(
+        Integration, on_delete=models.CASCADE, related_name='images', null=True
+    )
 
     class Meta:
         """Meta definition for Image."""

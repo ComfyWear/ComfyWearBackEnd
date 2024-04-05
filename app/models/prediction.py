@@ -1,6 +1,7 @@
 from django.db import models
 
 from utils.abstract_model import AbstractModel
+from app.models.integration import Integration
 
 
 class Prediction(AbstractModel):
@@ -13,24 +14,21 @@ class Prediction(AbstractModel):
 
     :param predicted_type: The type of object predicted.
     :type predicted_type: models.CharField
-    :param image: A foreign key that links to an image that the prediction is associated with.
-    :type image: models.ForeignKey
+    :param integration: The foreign key to the associated integration.
+    :type integration: models.ForeignKey
 
     :return: A string representation of the prediction type.
     :rtype: str
     """
+    predicted_type = models.CharField(
+        max_length=255, null=True, blank=True, help_text="Type of the predicted object"
+    )
+    integration = models.ForeignKey(
+        Integration, on_delete=models.CASCADE, related_name='predictions', null=True
+    )
 
     class Meta:
-        """Meta definition for Prediction."""
-
         app_label = "app"
         verbose_name = "Prediction"
         verbose_name_plural = "Predictions"
         ordering = ["id"]
-
-    predicted_type = models.CharField(
-        max_length=255, null=True, blank=True, help_text="Type of the predicted object"
-    )
-    image = models.ForeignKey(
-        'Image', on_delete=models.CASCADE, related_name='predictions'
-    )
