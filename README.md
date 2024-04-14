@@ -2,7 +2,7 @@
 
 For ged:
 ```
-git clone https://github.com/ComfyWear/ComfyWearBackEnd.git
+git clone --filter=lfs https://github.com/ComfyWear/ComfyWearBackEnd.git
 cd ComfyWearBackEnd
 python -m venv venv
 source ./venv/bin/activate
