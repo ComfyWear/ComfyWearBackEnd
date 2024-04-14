@@ -21,6 +21,9 @@ class Image(AbstractModel):
     :return: A string representation of the image UUID.
     :rtype: str
     """
+    detected_image = models.ImageField(
+        upload_to='detected_images/', null=True, blank=True
+    )
     integration = models.ForeignKey(
         Integration, on_delete=models.CASCADE, related_name='images', null=True
     )
@@ -32,7 +35,3 @@ class Image(AbstractModel):
         verbose_name = "Image"
         verbose_name_plural = "Images"
         ordering = ["id"]
-
-    detected_image = models.ImageField(
-        upload_to='detected_images/', null=True, blank=True
-    )

@@ -1,3 +1,5 @@
+from django.db import models
+
 from utils.abstract_model import AbstractModel
 
 
@@ -12,6 +14,10 @@ class Integration(AbstractModel):
     :return: A string representation of the integration's UUID.
     :rtype: str
     """
+
+    secret = models.CharField(
+        max_length=255, null=True, blank=True, help_text="Secrete integrate code"
+    )
 
     class Meta:
         app_label = "app"

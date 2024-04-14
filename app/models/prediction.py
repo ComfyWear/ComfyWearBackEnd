@@ -20,6 +20,7 @@ class Prediction(AbstractModel):
     :return: A string representation of the prediction type.
     :rtype: str
     """
+
     predicted_type = models.CharField(
         max_length=255, null=True, blank=True, help_text="Type of the predicted object"
     )
