@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ComfyWearBackEnd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ComfyWearBackEnd.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comfywearbackend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/comfywearbackend/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comfywearbackend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/comfywearbackend/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +90,7 @@
       <workItem from="1712129518978" duration="935000" />
       <workItem from="1712290006612" duration="148000" />
       <workItem from="1712290815752" duration="787000" />
-      <workItem from="1713071529888" duration="2127000" />
+      <workItem from="1713071529888" duration="3332000" />
     </task>
     <servers />
   </component>
