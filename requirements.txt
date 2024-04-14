@@ -6,3 +6,4 @@ git+https://github.com/facebookresearch/segment-anything.git@6fdee8f2727f4506cfb
 supervision>=0.19.0
 ultralytics>=8.1.47
 drf-spectacular>=0.27.2
+django-cors-headers>=4.3.1
