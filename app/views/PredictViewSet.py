@@ -1,11 +1,13 @@
+import os
 import cv2
+from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from rest_framework import status, viewsets
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 
-from app.models import Integration, Prediction, Image, Sensor, Comfort
+from app.models import Integration, Prediction, Image, Sensor
 from app.serializers import PredictionSerializer, ImageSerializer, \
     SensorSerializer, ComfortSerializer
 from models import ImageSegmentation, ComfortClassifier
@@ -45,7 +47,8 @@ class PredictViewSet(viewsets.ViewSet):
                                                             integration)
                 response_data['comfort_level'] = comfort_levels
 
-            default_storage.delete(image_path)
+            self.delete_excess_images('uploads')
+            self.delete_excess_images('detected_images')
 
             return Response(response_data, status=status.HTTP_201_CREATED)
         else:
@@ -71,10 +74,18 @@ class PredictViewSet(viewsets.ViewSet):
         image_serializer = ImageSerializer(data={'detected_image': img_file},
                                            context={'request': request})
         if image_serializer.is_valid():
-            image = image_serializer.save(integration=integration)
-            return image_serializer.data['detected_image']
+            image_serializer.save(integration=integration)
         else:
             raise Exception(image_serializer.errors)
+
+    def delete_excess_images(self, folder):
+        media_folder = os.path.join(settings.MEDIA_ROOT, folder)
+        images = [img for img in os.listdir(media_folder)]
+        if len(images) > 10:
+            images_to_delete = images[:5]
+            for image in images_to_delete:
+                image_path = os.path.join(media_folder, image)
+                os.remove(image_path)
 
     def create_sensor_data(self, local_temp, local_humid, integration):
         sensor_serializer = SensorSerializer(
@@ -90,13 +101,15 @@ class PredictViewSet(viewsets.ViewSet):
         comfort_levels = comfort_classifier.predict_comfort_level(labels,
                                                                   local_temp,
                                                                   local_humid)
+        comfort_data = []
         for comfort in comfort_levels:
             comfort_serializer = ComfortSerializer(data={'comfort': comfort})
             if comfort_serializer.is_valid():
                 comfort_serializer.save(integration=integration)
-                return comfort_serializer.data['comfort']
+                comfort_data.append(comfort_serializer.data['comfort'])
             else:
                 raise Exception(comfort_serializer.errors)
+        return comfort_data
 
     def get_response_data(self, integration, request):
         predictions = Prediction.objects.filter(integration=integration)
