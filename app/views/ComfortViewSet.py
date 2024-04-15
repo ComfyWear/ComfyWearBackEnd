@@ -18,9 +18,10 @@ class ComfortViewSet(viewsets.ViewSet):
         :return: Response with created prediction or error.
         """
         secret = request.data.get('secret')
+        comfort = request.data.get('comfort')
         integration = Integration.objects.filter(secret=secret).first()
 
-        if integration:
+        if integration and comfort:
             serializer = ComfortSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save(integration=integration)
