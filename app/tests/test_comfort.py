@@ -3,7 +3,6 @@ from app.tests import BaseTestCase
 from rest_framework import status
 
 
-
 class ComfortViewSetTestCase(BaseTestCase):
     """This class defines the test suite for the ComfortViewSet."""
 
@@ -37,3 +36,4 @@ class ComfortViewSetTestCase(BaseTestCase):
         }
         response = self.client.post(self.comfort_url, data, format='multipart')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Comfort.objects.count(), 0)
