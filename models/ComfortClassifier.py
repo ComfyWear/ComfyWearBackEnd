@@ -1,5 +1,4 @@
 import pandas as pd
-from catboost import CatBoostClassifier
 from sklearn.ensemble import RandomForestClassifier
 
 
