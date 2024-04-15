@@ -28,6 +28,8 @@ class ImageSegmentation:
     def segment_image(self, image_path):
         results = self.model(image_path, imgsz=480)
         pp_results = self.pp_model(image_path, imgsz=480)
+        annotated_image = None
+        all_labels = []
 
         for i, pr in enumerate(pp_results):
             annotated_image = cv2.imread(image_path)
@@ -59,16 +61,28 @@ class ImageSegmentation:
 
             result = results[i]
             detections = sv.Detections.from_ultralytics(result)
-            labels = [f"{result.names[class_id]} {confidence:.2f}" for
+            labels = [f"{result.names[class_id]}" for
                       xy, mask, confidence, class_id, tracker_id, data in
-                      detections]
+                      sorted(detections, key=lambda x: x[2], reverse=True)]
+
+            if len(labels) == 0:
+                upper_label, lower_label = None, None
+
+            elif len(labels) == 1:
+                upper_label, lower_label = labels[0], None
+
+            else:
+                upper_label, lower_label = labels[0], labels[1]
+
+            all_labels.append((upper_label, lower_label))
 
             annotated_image = self.box_annotator.annotate(
                 scene=annotated_image, detections=detections)
             annotated_image = self.label_annotator.annotate(
-                scene=annotated_image, detections=detections, labels=labels)
+                scene=annotated_image, detections=detections,
+                labels=[str(label) for label in labels])
 
-        return annotated_image, labels
+        return annotated_image, all_labels
 
     @staticmethod
     def save_segmented_image(annotated_image, output_path):

@@ -18,9 +18,15 @@ class SensorViewSet(viewsets.ViewSet):
         :return: Response with created task or error.
         """
         secret = request.data.get('secret')
-        integration = Integration.objects.filter(secret=secret).first()
+        local_temp = request.data.get('local_temp')
+        local_humid = request.data.get('local_humid')
 
-        if integration:
+        if secret and local_temp and local_humid:
+            integration = Integration.objects.filter(secret=secret).first()
+
+            if not integration:
+                integration = Integration.objects.create(secret=secret)
+
             serializer = SensorSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save(integration=integration)
@@ -29,5 +35,5 @@ class SensorViewSet(viewsets.ViewSet):
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({'error': 'Invalid secret code'},
+            return Response({'error': 'Invalid request data.'},
                             status=status.HTTP_400_BAD_REQUEST)

@@ -1,1 +1,2 @@
 from models.ImageSegmentation import ImageSegmentation
+from models.ComfortClassifier import ComfortClassifier
