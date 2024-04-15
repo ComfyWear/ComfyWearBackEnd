@@ -18,6 +18,7 @@ from models import ImageSegmentation, ComfortClassifier
 
 class PredictViewSet(viewsets.ViewSet):
     """ViewSet for handling Prediction-related operations."""
+
     parser_classes = (MultiPartParser, FormParser)
 
     def create(self, request):
