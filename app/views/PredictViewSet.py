@@ -40,10 +40,10 @@ class PredictViewSet(viewsets.ViewSet):
 
             local_temp, local_humid = self.get_sensor_data(integration)
             if local_temp and local_humid:
-                comfort_level = self.predict_comfort_level(labels, local_temp,
-                                                           local_humid,
-                                                           integration)
-                response_data['comfort_level'] = comfort_level
+                comfort_levels = self.predict_comfort_level(labels, local_temp,
+                                                            local_humid,
+                                                            integration)
+                response_data['comfort_level'] = comfort_levels
 
             default_storage.delete(image_path)
 
@@ -87,7 +87,9 @@ class PredictViewSet(viewsets.ViewSet):
     def predict_comfort_level(self, labels, local_temp, local_humid,
                               integration):
         comfort_classifier = ComfortClassifier()
-        comfort_levels = comfort_classifier.predict_comfort_level(labels, local_temp, local_humid)
+        comfort_levels = comfort_classifier.predict_comfort_level(labels,
+                                                                  local_temp,
+                                                                  local_humid)
         for comfort in comfort_levels:
             comfort_serializer = ComfortSerializer(data={'comfort': comfort})
             if comfort_serializer.is_valid():

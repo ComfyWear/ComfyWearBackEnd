@@ -60,21 +60,18 @@ class ImageSegmentation:
                     scene=annotated_image, detections=pp_detections)
 
             result = results[i]
-            detections = sv.Detections.from_ultralytics(result)
+            detections = sv.Detections.from_ultralytics(result).with_nms(threshold=0.1)
+
             labels = [f"{result.names[class_id]}" for
                       xy, mask, confidence, class_id, tracker_id, data in
-                      sorted(detections, key=lambda x: x[2], reverse=True)]
-
-            if len(labels) == 0:
-                upper_label, lower_label = None, None
-
-            elif len(labels) == 1:
-                upper_label, lower_label = labels[0], None
-
-            else:
-                upper_label, lower_label = labels[0], labels[1]
-
-            all_labels.append((upper_label, lower_label))
+                      detections]
+            upper_label, lower_label = None, None
+            for label in labels:
+                if label in ['shorts', 'skirt', 'trousers']:
+                    lower_label = label
+                else:
+                    upper_label = label
+                all_labels.append((upper_label, lower_label))
 
             annotated_image = self.box_annotator.annotate(
                 scene=annotated_image, detections=detections)
@@ -82,6 +79,8 @@ class ImageSegmentation:
                 scene=annotated_image, detections=detections,
                 labels=[str(label) for label in labels])
 
+        print("####################################")
+        print(f"All labels: {all_labels}")
         return annotated_image, all_labels
 
     @staticmethod

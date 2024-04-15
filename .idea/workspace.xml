@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/prediction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/PredictViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/PredictViewSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/SensorViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/SensorViewSet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/ImageSegmentation.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ImageSegmentation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +96,8 @@
       <workItem from="1713071529888" duration="3332000" />
       <workItem from="1713076817735" duration="1527000" />
       <workItem from="1713078356980" duration="816000" />
-      <workItem from="1713079410219" duration="15750000" />
+      <workItem from="1713079410219" duration="17858000" />
+      <workItem from="1713162419437" duration="2026000" />
     </task>
     <servers />
   </component>
