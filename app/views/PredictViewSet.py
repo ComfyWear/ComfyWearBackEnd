@@ -14,6 +14,7 @@ from app.models import Integration, Prediction, Image, Sensor
 from app.serializers import PredictionSerializer, ImageSerializer, \
     SensorSerializer, ComfortSerializer
 from models import ImageSegmentation, ComfortClassifier
+import imghdr
 
 
 class PredictViewSet(viewsets.ViewSet):
@@ -33,7 +34,7 @@ class PredictViewSet(viewsets.ViewSet):
         secret = request.data.get('secret')
         image_file = request.data.get('image')
 
-        if secret and image_file:
+        if secret and self._isvalid(image_file):
             integration = self._get_or_create_integration(secret)
             image_path = self._save_image(image_file)
             annotated_image, labels = self._segment_image(image_path)
@@ -220,3 +221,18 @@ class PredictViewSet(viewsets.ViewSet):
         if not sensor_data:
             return None, None
         return sensor_data.local_temp, sensor_data.local_humid
+
+    def _isvalid(self, file: ContentFile) -> bool:
+        """
+        Check if the given file is a valid image file.
+
+        :param file: The file to be validated.
+        :type file: django.core.files.uploadedfile.InMemoryUploadedFile or django.core.files.uploadedfile.TemporaryUploadedFile
+        :return: True if the file is a valid image, False otherwise.
+        :rtype: bool
+        """
+        valid_extensions = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp']
+        if not file:
+            return False
+        image_type = imghdr.what(file)
+        return image_type in valid_extensions

@@ -12,5 +12,6 @@ class BaseTestCase(APITestCase):
 
         self.comfort_url = "/app/api/comfort/"
         self.sensor_url = "/app/api/sensor/"
+        self.predict_url = "/app/api/predict/"
 
         self.client = APIClient()
