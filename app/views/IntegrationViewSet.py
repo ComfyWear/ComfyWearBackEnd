@@ -156,13 +156,12 @@ class IntegrationViewSet(viewsets.ViewSet):
                     }
 
                 comfort_level_details[comfort_level]['count'] += 1
-
                 if temperatures:
-                    comfort_level_details[comfort_level]['avg_temp'] += \
-                        temperatures[0] / len(comfort_levels)
+                    comfort_level_details[comfort_level]['avg_temp'] += sum(
+                        temperatures) / len(temperatures)
                 if humidities:
-                    comfort_level_details[comfort_level]['avg_humid'] += \
-                        humidities[0] / len(comfort_levels)
+                    comfort_level_details[comfort_level]['avg_humid'] += sum(
+                        humidities) / len(humidities)
 
                 if upper_label in comfort_level_details[comfort_level][
                     'upper_labels']:
