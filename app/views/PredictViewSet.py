@@ -20,7 +20,7 @@ class PredictViewSet(viewsets.ViewSet):
 
     parser_classes = (MultiPartParser, FormParser)
 
-    def create(self, request):
+    def create(self, request) -> Response:
         """
         Create a new Prediction object for a specific integration.
 
@@ -176,7 +176,6 @@ class PredictViewSet(viewsets.ViewSet):
         for comfort in comfort_levels:
             comfort_serializer = ComfortSerializer(data={'comfort': comfort})
             if comfort_serializer.is_valid():
-                comfort_serializer.save(integration=integration)
                 comfort_data.append(comfort_serializer.data['comfort'])
             else:
                 raise Exception(comfort_serializer.errors)

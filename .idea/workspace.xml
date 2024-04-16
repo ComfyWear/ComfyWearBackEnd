@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/setup_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/setup_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_router.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/PredictViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/PredictViewSet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,19 +33,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/krittinsetdhavanich/Downloads/ComfyWearBackEnd/media/uploads",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/krittinsetdhavanich/Downloads/ComfyWearBackEnd/media/uploads&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/media/uploads" />
@@ -103,7 +103,8 @@
       <workItem from="1713076817735" duration="1527000" />
       <workItem from="1713078356980" duration="816000" />
       <workItem from="1713079410219" duration="17858000" />
-      <workItem from="1713162419437" duration="15924000" />
+      <workItem from="1713162419437" duration="16272000" />
+      <workItem from="1713236158818" duration="14636000" />
     </task>
     <servers />
   </component>
