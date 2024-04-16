@@ -4,7 +4,6 @@
     <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/IntegrationViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/IntegrationViewSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/abstract_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/abstract_model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +102,7 @@
       <workItem from="1713078356980" duration="816000" />
       <workItem from="1713079410219" duration="17858000" />
       <workItem from="1713162419437" duration="16272000" />
-      <workItem from="1713236158818" duration="19957000" />
+      <workItem from="1713236158818" duration="23960000" />
     </task>
     <servers />
   </component>
@@ -120,16 +119,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/views/IntegrationViewSet.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

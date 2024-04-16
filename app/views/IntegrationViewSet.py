@@ -17,6 +17,9 @@ class IntegrationViewSet(viewsets.ViewSet):
     comfort level details, and clothing label counts.
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+
     def list(self, request: Request) -> Response:
         """
         List all comfort data.
@@ -26,9 +29,7 @@ class IntegrationViewSet(viewsets.ViewSet):
         :return: The HTTP response containing the comfort data.
         :rtype: rest_framework.response.Response
         """
-        comfort_data = Comfort.objects.all()
-        print("#"*10)
-        print(comfort_data.values())
+        comfort_data = Comfort.objects.all().order_by("timestamp")
 
         if comfort_data.exists():
             avg_comfort_level = self._get_average_comfort_level(comfort_data)
@@ -100,24 +101,26 @@ class IntegrationViewSet(viewsets.ViewSet):
                     'temperatures': [],
                     'humidities': []
                 }
+
+                predictions = Prediction.objects.filter(
+                    integration=integration)
+                for prediction in predictions:
+                    integration_data[integration]['upper_labels'].append(
+                        prediction.predicted_upper)
+                    integration_data[integration]['lower_labels'].append(
+                        prediction.predicted_lower)
+
+                sensors = Sensor.objects.filter(integration=integration)
+                for sensor in sensors:
+                    if sensor.local_temp:
+                        integration_data[integration]['temperatures'].append(
+                            sensor.local_temp)
+                    if sensor.local_humid:
+                        integration_data[integration]['humidities'].append(
+                            sensor.local_humid)
+
             integration_data[integration]['comfort_levels'].append(
                 comfort.comfort)
-
-            predictions = Prediction.objects.filter(integration=integration)
-            for prediction in predictions:
-                integration_data[integration]['upper_labels'].append(
-                    prediction.predicted_upper)
-                integration_data[integration]['lower_labels'].append(
-                    prediction.predicted_lower)
-
-            sensors = Sensor.objects.filter(integration=integration)
-            for sensor in sensors:
-                if sensor.local_temp:
-                    integration_data[integration]['temperatures'].append(
-                        sensor.local_temp)
-                if sensor.local_humid:
-                    integration_data[integration]['humidities'].append(
-                        sensor.local_humid)
 
         return integration_data
 
@@ -140,10 +143,8 @@ class IntegrationViewSet(viewsets.ViewSet):
             humidities = data['humidities']
 
             for i, comfort_level in enumerate(comfort_levels):
-                upper_label = upper_labels[i] if i < len(
-                    upper_labels) else None
-                lower_label = lower_labels[i] if i < len(
-                    lower_labels) else None
+                upper_label = upper_labels[i] if i < len(upper_labels) else None
+                lower_label = lower_labels[i] if i < len(upper_labels) else None
 
                 if comfort_level not in comfort_level_details:
                     comfort_level_details[comfort_level] = {
@@ -156,12 +157,12 @@ class IntegrationViewSet(viewsets.ViewSet):
 
                 comfort_level_details[comfort_level]['count'] += 1
 
-                if len(temperatures) > 0:
+                if temperatures:
                     comfort_level_details[comfort_level]['avg_temp'] += \
-                    temperatures[i] / len(comfort_levels)
-                if len(humidities) > 0:
+                        temperatures[0] / len(comfort_levels)
+                if humidities:
                     comfort_level_details[comfort_level]['avg_humid'] += \
-                    humidities[i] / len(comfort_levels)
+                        humidities[0] / len(comfort_levels)
 
                 if upper_label in comfort_level_details[comfort_level][
                     'upper_labels']:
