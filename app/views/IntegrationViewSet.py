@@ -27,6 +27,8 @@ class IntegrationViewSet(viewsets.ViewSet):
         :rtype: rest_framework.response.Response
         """
         comfort_data = Comfort.objects.all()
+        print("#"*10)
+        print(comfort_data.values())
 
         if comfort_data.exists():
             avg_comfort_level = self._get_average_comfort_level(comfort_data)
@@ -103,12 +105,10 @@ class IntegrationViewSet(viewsets.ViewSet):
 
             predictions = Prediction.objects.filter(integration=integration)
             for prediction in predictions:
-                if prediction.predicted_upper:
-                    integration_data[integration]['upper_labels'].append(
-                        prediction.predicted_upper)
-                if prediction.predicted_lower:
-                    integration_data[integration]['lower_labels'].append(
-                        prediction.predicted_lower)
+                integration_data[integration]['upper_labels'].append(
+                    prediction.predicted_upper)
+                integration_data[integration]['lower_labels'].append(
+                    prediction.predicted_lower)
 
             sensors = Sensor.objects.filter(integration=integration)
             for sensor in sensors:
@@ -139,7 +139,12 @@ class IntegrationViewSet(viewsets.ViewSet):
             temperatures = data['temperatures']
             humidities = data['humidities']
 
-            for comfort_level in set(comfort_levels):
+            for i, comfort_level in enumerate(comfort_levels):
+                upper_label = upper_labels[i] if i < len(
+                    upper_labels) else None
+                lower_label = lower_labels[i] if i < len(
+                    lower_labels) else None
+
                 if comfort_level not in comfort_level_details:
                     comfort_level_details[comfort_level] = {
                         'count': 0,
@@ -149,38 +154,30 @@ class IntegrationViewSet(viewsets.ViewSet):
                         'lower_labels': {}
                     }
 
-                comfort_level_details[comfort_level][
-                    'count'] += comfort_levels.count(comfort_level)
+                comfort_level_details[comfort_level]['count'] += 1
 
                 if len(temperatures) > 0:
-                    comfort_level_details[comfort_level]['avg_temp'] += sum(
-                        temperatures) / len(temperatures)
+                    comfort_level_details[comfort_level]['avg_temp'] += \
+                    temperatures[i] / len(comfort_levels)
                 if len(humidities) > 0:
-                    comfort_level_details[comfort_level]['avg_humid'] += sum(
-                        humidities) / len(humidities)
+                    comfort_level_details[comfort_level]['avg_humid'] += \
+                    humidities[i] / len(comfort_levels)
 
-                for i in range(len(comfort_levels)):
-                    if comfort_levels[i] == comfort_level:
-                        upper_label = upper_labels[i] if i < len(
-                            upper_labels) else None
-                        lower_label = lower_labels[i] if i < len(
-                            lower_labels) else None
+                if upper_label in comfort_level_details[comfort_level][
+                    'upper_labels']:
+                    comfort_level_details[comfort_level]['upper_labels'][
+                        upper_label] += 1
+                else:
+                    comfort_level_details[comfort_level]['upper_labels'][
+                        upper_label] = 1
 
-                        if upper_label in comfort_level_details[comfort_level][
-                            'upper_labels']:
-                            comfort_level_details[comfort_level][
-                                'upper_labels'][upper_label] += 1
-                        else:
-                            comfort_level_details[comfort_level][
-                                'upper_labels'][upper_label] = 1
-
-                        if lower_label in comfort_level_details[comfort_level][
-                            'lower_labels']:
-                            comfort_level_details[comfort_level][
-                                'lower_labels'][lower_label] += 1
-                        else:
-                            comfort_level_details[comfort_level][
-                                'lower_labels'][lower_label] = 1
+                if lower_label in comfort_level_details[comfort_level][
+                    'lower_labels']:
+                    comfort_level_details[comfort_level]['lower_labels'][
+                        lower_label] += 1
+                else:
+                    comfort_level_details[comfort_level]['lower_labels'][
+                        lower_label] = 1
 
         return comfort_level_details
 
