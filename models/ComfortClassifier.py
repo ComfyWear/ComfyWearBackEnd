@@ -1,3 +1,4 @@
+"""The module containing the classifier for inference the comfort level."""
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier

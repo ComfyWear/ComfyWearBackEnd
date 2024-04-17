@@ -1,3 +1,4 @@
+"""The module containing the image segmentation class."""
 import cv2
 import numpy as np
 import supervision as sv
@@ -8,9 +9,13 @@ from ultralytics import YOLO
 class ImageSegmentation:
     """
     The ImageSegmentation class is responsible for segmenting the image.
+
+    The class uses the YOLO model to detect the clothing items in the image.
+    The detected clothing items are then segmented using the SAM model.
     """
 
     def __init__(self):
+        """Initialize the ImageSegmentation class."""
         self.model = YOLO("models/weights/best.pt")
         self.pp_model = YOLO("models/weights/yolov9c.pt")
         self.device = "cpu"

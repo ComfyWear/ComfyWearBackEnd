@@ -1,6 +1,8 @@
+"""The module that defines the SensorViewSetTestCase class."""
+from rest_framework import status
+
 from app.models import Sensor
 from app.tests import BaseTestCase
-from rest_framework import status
 
 
 class SensorViewSetTestCase(BaseTestCase):

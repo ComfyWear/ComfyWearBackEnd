@@ -1,5 +1,6 @@
 """The module defines the PredictViewSet class."""
 from django.db import models
+
 from utils.abstract_model import AbstractModel
 
 

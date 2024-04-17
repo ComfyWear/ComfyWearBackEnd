@@ -1,7 +1,8 @@
 """This module defines the test suite for the IntegrationViewSet."""
+from rest_framework import status
+
 from app.models import Comfort
 from app.tests import BaseTestCase
-from rest_framework import status
 
 
 class ComfortViewSetTestCase(BaseTestCase):

@@ -1,5 +1,6 @@
 """This module defines the test suite for the IntegrationViewSet."""
 from rest_framework.test import APIClient, APITestCase
+
 from app.models import Integration
 
 

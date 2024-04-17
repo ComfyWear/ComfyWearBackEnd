@@ -2,6 +2,7 @@
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
+
 from app.serializers import SensorSerializer
 from app.models import Integration
 

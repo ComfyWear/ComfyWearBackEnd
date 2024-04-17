@@ -1,6 +1,7 @@
 """The module defines the PredictViewSet class."""
 import os
 import imghdr
+
 import cv2
 import numpy as np
 from django.conf import settings
@@ -10,6 +11,7 @@ from rest_framework import status, viewsets
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.request import Request
 from rest_framework.response import Response
+
 from app.models import Integration, Prediction, Image, Sensor
 from app.serializers import PredictionSerializer, ImageSerializer, \
     SensorSerializer, ComfortSerializer

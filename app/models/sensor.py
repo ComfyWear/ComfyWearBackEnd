@@ -1,5 +1,6 @@
 """The module defines the Sensor model."""""
 from django.db import models
+
 from utils.abstract_model import AbstractModel
 from app.models.integration import Integration
 

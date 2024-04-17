@@ -11,6 +11,16 @@
       <change beforePath="$PROJECT_DIR$/app/serializers/ImageSerializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/ImageSerializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/serializers/PredictionSerializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/PredictionSerializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/serializers/SensorSerializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/SensorSerializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_comfort.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_comfort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_integrate.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_integrate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_resources/setup_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_resources/setup_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/ComfortViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/ComfortViewSet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/PredictViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/PredictViewSet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/SensorViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/SensorViewSet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ComfortClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ComfortClassifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ImageSegmentation.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ImageSegmentation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
