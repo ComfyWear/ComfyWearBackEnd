@@ -43,4 +43,3 @@ class SensorViewSetTestCase(BaseTestCase):
         response = self.client.post(self.sensor_url, data, format='multipart')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(Sensor.objects.count(), 0)
-

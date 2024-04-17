@@ -1,3 +1,4 @@
+"""This module defines the test suite for the PredictViewSet."""
 from app.models import Prediction
 from app.tests import BaseTestCase
 from rest_framework import status
@@ -9,7 +10,7 @@ class PredictViewSetTestCase(BaseTestCase):
 
     def test_create_prediction_with_valid_data(self):
         """Test the API can create a prediction object with valid data."""
-        with open('app/tests/test_image.jpg', 'rb') as image_file:
+        with open('app/tests/resources/test_image.jpg', 'rb') as image_file:
             data = {
                 'secret': self.secret,
                 'image': SimpleUploadedFile(image_file.name,
@@ -22,7 +23,7 @@ class PredictViewSetTestCase(BaseTestCase):
 
     def test_create_prediction_with_invalid_secret(self):
         """Test the API returns an error when creating a prediction object with an invalid secret."""
-        with open('app/tests/test_image.jpg', 'rb') as image_file:
+        with open('app/tests/resources/test_image.jpg', 'rb') as image_file:
             data = {
                 'secret': 'invalid_secret',
                 'image': SimpleUploadedFile(image_file.name,
@@ -46,7 +47,7 @@ class PredictViewSetTestCase(BaseTestCase):
 
     def test_create_prediction_with_invalid_format(self):
         """Test the API returns an error when creating a prediction object with an invalid image format."""
-        with open('app/tests/test_invalid_image.txt', 'rb') \
+        with open('app/tests/resources/test_invalid_image.txt', 'rb') \
                 as invalid_image_file:
             data = {
                 'secret': self.secret,

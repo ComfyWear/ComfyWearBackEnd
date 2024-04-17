@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tests/setup_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/setup_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_comfort.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_comfort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/resources/test_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_invalid_image.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/resources/test_invalid_image.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/test_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_sensor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/IntegrationViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/IntegrationViewSet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +57,7 @@
       <recent name="$PROJECT_DIR$/media/detected_images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/tests/resources" />
       <recent name="$PROJECT_DIR$/app/tests" />
       <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$/models/weights" />
@@ -103,7 +110,8 @@
       <workItem from="1713078356980" duration="816000" />
       <workItem from="1713079410219" duration="17858000" />
       <workItem from="1713162419437" duration="16272000" />
-      <workItem from="1713236158818" duration="26852000" />
+      <workItem from="1713236158818" duration="28569000" />
+      <workItem from="1713320117989" duration="4551000" />
     </task>
     <servers />
   </component>

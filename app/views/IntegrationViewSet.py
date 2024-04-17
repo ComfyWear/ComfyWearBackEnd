@@ -103,14 +103,14 @@ class IntegrationViewSet(viewsets.ViewSet):
                 }
 
                 predictions = Prediction.objects.filter(
-                    integration=integration)
+                    integration=integration).order_by('timestamp')
                 for prediction in predictions:
                     integration_data[integration]['upper_labels'].append(
                         prediction.predicted_upper)
                     integration_data[integration]['lower_labels'].append(
                         prediction.predicted_lower)
 
-                sensors = Sensor.objects.filter(integration=integration)
+                sensors = Sensor.objects.filter(integration=integration).order_by("timestamp")
                 for sensor in sensors:
                     if sensor.local_temp:
                         integration_data[integration]['temperatures'].append(
