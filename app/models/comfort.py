@@ -1,5 +1,5 @@
+"""The module defines the Comfort model."""
 from django.db import models
-
 from utils.abstract_model import AbstractModel
 from app.models.integration import Integration
 
@@ -20,6 +20,7 @@ class Comfort(AbstractModel):
     :return: A string representation of the comfort level descriptor.
     :rtype: str
     """
+
     comfort = models.CharField(
         max_length=255, null=True, blank=True,
         help_text="Comfort level descriptor"
@@ -29,6 +30,7 @@ class Comfort(AbstractModel):
     )
 
     class Meta:
+        """Meta definition for Comfort."""
         app_label = "app"
         verbose_name = "Comfort"
         verbose_name_plural = "Comforts"

@@ -1,5 +1,5 @@
+"""The module defines the Prediction model."""
 from django.db import models
-
 from utils.abstract_model import AbstractModel
 from app.models.integration import Integration
 
@@ -32,6 +32,7 @@ class Prediction(AbstractModel):
     )
 
     class Meta:
+        """Meta definition for Prediction."""
         app_label = "app"
         verbose_name = "Prediction"
         verbose_name_plural = "Predictions"

@@ -1,5 +1,5 @@
+"""The module defines the PredictViewSet class."""
 from django.db import models
-
 from utils.abstract_model import AbstractModel
 
 
@@ -20,6 +20,7 @@ class Integration(AbstractModel):
     )
 
     class Meta:
+        """Meta definition for Integration."""
         app_label = "app"
         verbose_name = "Integration"
         verbose_name_plural = "Integrations"

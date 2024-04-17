@@ -1,6 +1,5 @@
+"""The module defines the Image model."""
 from django.db import models
-
-
 from utils.abstract_model import AbstractModel
 from app.models.integration import Integration
 
@@ -21,6 +20,7 @@ class Image(AbstractModel):
     :return: A string representation of the image UUID.
     :rtype: str
     """
+
     detected_image = models.ImageField(
         upload_to='detected_images/', null=True, blank=True
     )

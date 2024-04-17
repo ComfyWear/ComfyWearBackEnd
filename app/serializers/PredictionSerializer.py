@@ -1,6 +1,5 @@
 """The module defines the serializer for the Prediction model."""
 from rest_framework import serializers
-
 from app.models import Prediction
 
 

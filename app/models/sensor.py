@@ -1,5 +1,5 @@
+"""The module defines the Sensor model."""""
 from django.db import models
-
 from utils.abstract_model import AbstractModel
 from app.models.integration import Integration
 
@@ -22,6 +22,7 @@ class Sensor(AbstractModel):
     :return: A string representation of the sensor UUID.
     :rtype: str
     """
+
     local_temp = models.FloatField(
         null=True, blank=True, help_text="Local temperature reading"
     )
@@ -33,6 +34,7 @@ class Sensor(AbstractModel):
     )
 
     class Meta:
+        """Meta definition for Sensor."""
         app_label = "app"
         verbose_name = "Sensor"
         verbose_name_plural = "Sensors"

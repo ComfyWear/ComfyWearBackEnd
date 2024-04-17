@@ -1,6 +1,5 @@
 """The module defines the serializer for the Sensor model."""
 from rest_framework import serializers
-
 from app.models import Sensor
 
 
