@@ -1,9 +1,9 @@
 """A module that defines the ComfortViewSet class."""
 from rest_framework import status, viewsets
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 from app.serializers import ComfortSerializer
 from app.models import Integration
-from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class ComfortViewSet(viewsets.ViewSet):
@@ -29,6 +29,5 @@ class ComfortViewSet(viewsets.ViewSet):
                                 status=status.HTTP_201_CREATED)
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response({'error': 'Invalid secret code'},
-                            status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Invalid secret code'},
+                        status=status.HTTP_400_BAD_REQUEST)

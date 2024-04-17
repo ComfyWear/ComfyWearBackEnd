@@ -1,3 +1,4 @@
+"""The module defines the IntegrationViewSet class."""
 from typing import Dict, List
 
 from django.db.models import Avg, Count
@@ -16,9 +17,6 @@ class IntegrationViewSet(viewsets.ViewSet):
     including the average comfort level, comfort level distribution,
     comfort level details, and clothing label counts.
     """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__()
 
     def list(self, request: Request) -> Response:
         """
@@ -135,7 +133,7 @@ class IntegrationViewSet(viewsets.ViewSet):
         :rtype: Dict[int, Dict[str, object]]
         """
         comfort_level_details = {}
-        for integration, data in integration_data.items():
+        for data in integration_data.values():
             comfort_levels = data['comfort_levels']
             upper_labels = data['upper_labels']
             lower_labels = data['lower_labels']

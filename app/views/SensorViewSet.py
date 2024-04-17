@@ -1,9 +1,9 @@
 """A module that defines the SensorViewSet class."""
 from rest_framework import status, viewsets
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 from app.serializers import SensorSerializer
 from app.models import Integration
-from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class SensorViewSet(viewsets.ViewSet):
@@ -34,6 +34,5 @@ class SensorViewSet(viewsets.ViewSet):
                                 status=status.HTTP_201_CREATED)
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response({'error': 'Invalid request data.'},
-                            status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Invalid request data.'},
+                        status=status.HTTP_400_BAD_REQUEST)

@@ -1,4 +1,6 @@
+"""The module defines the PredictViewSet class."""
 import os
+import imghdr
 import cv2
 import numpy as np
 from django.conf import settings
@@ -12,7 +14,6 @@ from app.models import Integration, Prediction, Image, Sensor
 from app.serializers import PredictionSerializer, ImageSerializer, \
     SensorSerializer, ComfortSerializer
 from models import ImageSegmentation, ComfortClassifier
-import imghdr
 
 
 class PredictViewSet(viewsets.ViewSet):
@@ -52,9 +53,8 @@ class PredictViewSet(viewsets.ViewSet):
             self._delete_excess_images('detected_images')
 
             return Response(response_data, status=status.HTTP_201_CREATED)
-        else:
-            return Response({'error': 'Missing required data'},
-                            status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Missing required data'},
+                        status=status.HTTP_400_BAD_REQUEST)
 
     def _get_or_create_integration(self, secret: str) -> Integration:
         """
@@ -143,7 +143,7 @@ class PredictViewSet(viewsets.ViewSet):
         :type folder: str
         """
         media_folder = os.path.join(settings.MEDIA_ROOT, folder)
-        images = [img for img in os.listdir(media_folder)]
+        images = list(os.listdir(media_folder))
         if len(images) > 10:
             images_to_delete = images[:5]
             for image in images_to_delete:
@@ -224,7 +224,7 @@ class PredictViewSet(viewsets.ViewSet):
         Check if the given file is a valid image file.
 
         :param file: The file to be validated.
-        :type file: django.core.files.uploadedfile.InMemoryUploadedFile or django.core.files.uploadedfile.TemporaryUploadedFile
+        :type file: django.core.files.uploadedfile.InMemoryUploadedFile
         :return: True if the file is a valid image, False otherwise.
         :rtype: bool
         """
