@@ -1,7 +1,7 @@
 """The module containing the classifier for inference the comfort level."""
+import joblib
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
 
 
 class ComfortClassifier:
@@ -14,22 +14,8 @@ class ComfortClassifier:
         The classifier is a random forest classifier that is trained on a dataset containing
         comfort level labels, clothing item labels, local temperature, and local humidity.
         """
-        self.classifier: RandomForestClassifier = RandomForestClassifier()
-        self.ds: pd.DataFrame = pd.read_csv("models/data.csv")
-        self.columns: pd.Index = self.ds.columns[:-1]
-        self.train_classifier()
-
-    def train_classifier(self) -> None:
-        """
-        Train the comfort level classifier using the loaded dataset.
-
-        The classifier is trained on the dataset containing comfort
-        level labels, clothing item labels, local temperature,
-        and local humidity.
-        """
-        X_train: pd.DataFrame = self.ds.drop("comfort_level", axis=1)
-        y_train: pd.Series = self.ds["comfort_level"]
-        self.classifier.fit(X_train, y_train)
+        self.classifier = joblib.load("models/weights/mlp_model.pkl")
+        self.columns = pd.read_csv("models/model_resources/data.csv").columns[:-1]
 
     def predict_comfort_level(self, labels: list[tuple], local_temp: float,
                               local_humid: float) -> list:
@@ -47,7 +33,7 @@ class ComfortClassifier:
         """
         input_data: list = self._prepare_input_data(labels, local_temp,
                                                     local_humid)
-        input_df: pd.DataFrame = pd.DataFrame(input_data, columns=self.columns)
+        input_df: pd.DataFrame = pd.DataFrame(input_data)
         comfort_levels: np.ndarray = self.classifier.predict(input_df)
         return comfort_levels.tolist()
 
@@ -69,10 +55,45 @@ class ComfortClassifier:
         for upper_label, lower_label in labels:
             row_data: list = [0] * len(self.columns)
             if upper_label:
+                upper_label = self._map_input(upper_label)
                 row_data[self.columns.get_loc(upper_label)] = 1
             if lower_label:
+                lower_label = self._map_input(lower_label, False)
                 row_data[self.columns.get_loc(lower_label)] = 1
             row_data[-2] = local_temp
             row_data[-1] = local_humid
             input_data.append(row_data)
         return input_data
+
+    def _map_input(self, label: str, is_upper=True) -> str:
+        """
+        Map the input label to the corresponding label in the dataset.
+
+        :param label: The input label.
+        :type label: str
+        :param is_upper: A flag indicating whether the label is for the upper or lower body.
+        :type is_upper: bool
+        :return: The mapped label.
+        :rtype: str
+        """
+        upper_mapping = {
+            "long sleeve dress": "long sleeve top",
+            "short sleeve dress": "short sleeve top",
+            "sling": "long sleeve top",
+            "sling dress": "short sleeve top",
+            "vest": "short sleeve top",
+            "vest dress": "short sleeve top"
+        }
+
+        lower_mapping = {
+            "long sleeve dress": "skirt",
+            "short sleeve dress": "skirt",
+            "sling": "skirt",
+            "sling dress": "skirt",
+            "vest": "skirt",
+            "vest dress": "skirt"
+        }
+
+        if is_upper:
+            return upper_mapping.get(label, label)
+        return lower_mapping.get(label, label)

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="" />
+    <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ComfortClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ComfortClassifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/model_resources/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/models/model_resources/data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,11 +52,11 @@
       <recent name="$PROJECT_DIR$/media/detected_images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models/model_resources" />
+      <recent name="$PROJECT_DIR$/models/weights" />
+      <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$/app/tests/test_resources" />
       <recent name="$PROJECT_DIR$/app/tests/resources" />
-      <recent name="$PROJECT_DIR$/app/tests" />
-      <recent name="$PROJECT_DIR$/models" />
-      <recent name="$PROJECT_DIR$/models/weights" />
     </key>
   </component>
   <component name="RunManager">
