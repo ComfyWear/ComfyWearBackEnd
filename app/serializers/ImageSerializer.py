@@ -11,7 +11,6 @@ class ImageSerializer(serializers.ModelSerializer):
     Handles the conversion of Image model instances to JSON format and
     vice versa, simplifying the process of transmitting Task data over APIs.
     """
-    detected_image = serializers.ImageField(use_url=True)
 
     class Meta:
         """Meta definition for Task."""

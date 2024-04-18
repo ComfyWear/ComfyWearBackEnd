@@ -11,7 +11,6 @@ class PredictionSerializer(serializers.ModelSerializer):
     Handles the conversion of Prediction model instances to JSON format and
     vice versa, simplifying the process of transmitting Task data over APIs.
     """
-    image = serializers.ImageField(required=False)
 
     class Meta:
         """Meta definition for Task."""

@@ -45,3 +45,14 @@ class SensorViewSetTestCase(BaseTestCase):
         response = self.client.post(self.sensor_url, data, format='multipart')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(Sensor.objects.count(), 0)
+
+    def test_create_sensor_with_invalid_data_type(self):
+        """Test the API returns an error when creating a sensor object with invalid data type."""
+        data = {
+            'secret': self.secret,
+            'local_temp': 'invalid',
+            'local_humid': 60.0
+        }
+        response = self.client.post(self.sensor_url, data, format='multipart')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Sensor.objects.count(), 0)
