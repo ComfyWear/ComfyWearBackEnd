@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from app.models import Comfort, Sensor, Prediction
 
 
-class IntegrationViewSet(viewsets.ViewSet):
+class IntegrateViewSet(viewsets.ViewSet):
     """
     ViewSet for handling Integration-related operations.
 
