@@ -9,6 +9,7 @@ from app.models import Integration
 
 class SensorViewSet(viewsets.ViewSet):
     """ViewSet for handling Sensor-related operations."""
+
     parser_classes = (MultiPartParser, FormParser)
 
     def create(self, request):

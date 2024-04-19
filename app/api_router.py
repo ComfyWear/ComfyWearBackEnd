@@ -1,7 +1,9 @@
+"""A module that defines the URL configuration for the app."""
 from django.conf import settings
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
-from app.views import PredictViewSet, SensorViewSet, ComfortViewSet, IntegrateViewSet
+from app.views import PredictViewSet, SensorViewSet, \
+    ComfortViewSet, IntegrateViewSet
 
 
 if settings.DEBUG:

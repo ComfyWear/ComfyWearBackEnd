@@ -21,7 +21,7 @@ class ComfortViewSetTestCase(BaseTestCase):
         self.assertEqual(Comfort.objects.get().integration, self.integration)
 
     def test_create_comfort_with_invalid_secret(self):
-        """Test the API returns an error when creating a comfort object with an invalid secret."""
+        """Test when creating a comfort object with an invalid secret."""
         data = {
             'secret': 'invalid_secret',
             'comfort': 'Comfortable'
@@ -32,7 +32,7 @@ class ComfortViewSetTestCase(BaseTestCase):
         self.assertEqual(response.data['error'], 'Invalid secret code')
 
     def test_create_comfort_with_missing_comfort_data(self):
-        """Test the API returns an error when creating a comfort object with missing comfort data."""
+        """Test when creating a comfort object with missing comfort data."""
         data = {
             'secret': self.secret,
         }

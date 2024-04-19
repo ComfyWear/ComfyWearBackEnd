@@ -1,3 +1,4 @@
+"""A module that defines the URL configuration for the app."""
 from django.urls import include, path
 
 urlpatterns = [

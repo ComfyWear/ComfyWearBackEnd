@@ -23,17 +23,21 @@ class Prediction(AbstractModel):
     """
 
     predicted_upper = models.CharField(
-        max_length=255, null=True, blank=True, help_text="Upper of the predicted object"
+        max_length=255, null=True, blank=True,
+        help_text="Upper of the predicted object"
     )
     predicted_lower = models.CharField(
-        max_length=255, null=True, blank=True, help_text="Lower of the predicted object"
+        max_length=255, null=True, blank=True,
+        help_text="Lower of the predicted object"
     )
     integration = models.ForeignKey(
-        Integration, on_delete=models.CASCADE, related_name='predictions', null=True
+        Integration, on_delete=models.CASCADE,
+        related_name='predictions', null=True
     )
 
     class Meta:
         """Meta definition for Prediction."""
+
         app_label = "app"
         verbose_name = "Prediction"
         verbose_name_plural = "Predictions"

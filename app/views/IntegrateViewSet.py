@@ -66,7 +66,7 @@ class IntegrateViewSet(viewsets.ViewSet):
         return comfort_data.aggregate(Avg('comfort'))['comfort__avg']
 
     def _get_comfort_level_distribution(self, comfort_data: Comfort) -> List[
-        Dict[str, int]]:
+            Dict[str, int]]:
         """
         Get the comfort level distribution.
 
@@ -79,7 +79,7 @@ class IntegrateViewSet(viewsets.ViewSet):
             comfort_data.values('comfort').annotate(count=Count('comfort')))
 
     def _group_data_by_integration(self, comfort_data: Comfort) -> Dict[
-        int, Dict[str, List]]:
+            int, Dict[str, List]]:
         """
         Group the comfort data by integration.
 
@@ -108,7 +108,8 @@ class IntegrateViewSet(viewsets.ViewSet):
                     integration_data[integration]['lower_labels'].append(
                         prediction.predicted_lower)
 
-                sensors = Sensor.objects.filter(integration=integration).order_by("timestamp")
+                sensors = Sensor.objects.filter(
+                    integration=integration).order_by("timestamp")
                 for sensor in sensors:
                     if sensor.local_temp:
                         integration_data[integration]['temperatures'].append(
@@ -123,7 +124,7 @@ class IntegrateViewSet(viewsets.ViewSet):
         return integration_data
 
     def _get_comfort_level_details(self, integration_data: Dict[
-        int, Dict[str, List]]) -> Dict[int, Dict[str, object]]:
+            int, Dict[str, List]]) -> Dict[int, Dict[str, object]]:
         """
         Get the comfort level details.
 
@@ -141,8 +142,10 @@ class IntegrateViewSet(viewsets.ViewSet):
             humidities = data['humidities']
 
             for i, comfort_level in enumerate(comfort_levels):
-                upper_label = upper_labels[i] if i < len(upper_labels) else None
-                lower_label = lower_labels[i] if i < len(upper_labels) else None
+                upper_label = upper_labels[i] if i < len(
+                    upper_labels) else None
+                lower_label = lower_labels[i] if i < len(
+                    upper_labels) else None
 
                 if comfort_level not in comfort_level_details:
                     comfort_level_details[comfort_level] = {
@@ -162,7 +165,7 @@ class IntegrateViewSet(viewsets.ViewSet):
                         humidities) / len(humidities)
 
                 if upper_label in comfort_level_details[comfort_level][
-                    'upper_labels']:
+                        'upper_labels']:
                     comfort_level_details[comfort_level]['upper_labels'][
                         upper_label] += 1
                 else:
@@ -170,7 +173,7 @@ class IntegrateViewSet(viewsets.ViewSet):
                         upper_label] = 1
 
                 if lower_label in comfort_level_details[comfort_level][
-                    'lower_labels']:
+                        'lower_labels']:
                     comfort_level_details[comfort_level]['lower_labels'][
                         lower_label] += 1
                 else:

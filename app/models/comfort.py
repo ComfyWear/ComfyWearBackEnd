@@ -27,11 +27,13 @@ class Comfort(AbstractModel):
         help_text="Comfort level descriptor"
     )
     integration = models.ForeignKey(
-        Integration, on_delete=models.CASCADE, related_name='comforts', null=True
+        Integration, on_delete=models.CASCADE, related_name='comforts',
+        null=True
     )
 
     class Meta:
         """Meta definition for Comfort."""
+
         app_label = "app"
         verbose_name = "Comfort"
         verbose_name_plural = "Comforts"

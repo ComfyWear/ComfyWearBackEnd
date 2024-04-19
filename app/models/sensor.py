@@ -31,11 +31,13 @@ class Sensor(AbstractModel):
         null=True, blank=True, help_text="Local humidity reading"
     )
     integration = models.ForeignKey(
-        Integration, on_delete=models.CASCADE, related_name='sensors', null=True
+        Integration, on_delete=models.CASCADE, related_name='sensors',
+        null=True
     )
 
     class Meta:
         """Meta definition for Sensor."""
+
         app_label = "app"
         verbose_name = "Sensor"
         verbose_name_plural = "Sensors"

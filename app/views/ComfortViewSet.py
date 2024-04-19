@@ -9,6 +9,7 @@ from app.models import Integration
 
 class ComfortViewSet(viewsets.ViewSet):
     """ViewSet for handling Comfort-related operations."""
+
     parser_classes = (MultiPartParser, FormParser)
 
     def create(self, request):

@@ -6,8 +6,7 @@ from utils.abstract_model import AbstractModel
 
 class Integration(AbstractModel):
     """
-    Represents a collection of related data for a particular integration
-    within the system.
+    A collection of related data for a particular integration.
 
     This model inherits from the AbstractModel and contains an auto-generated
     UUID as a primary key.
@@ -17,11 +16,13 @@ class Integration(AbstractModel):
     """
 
     secret = models.CharField(
-        max_length=255, null=True, blank=True, help_text="Secrete integrate code"
+        max_length=255, null=True, blank=True,
+        help_text="Secrete integrate code"
     )
 
     class Meta:
         """Meta definition for Integration."""
+
         app_label = "app"
         verbose_name = "Integration"
         verbose_name_plural = "Integrations"

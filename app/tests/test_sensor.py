@@ -23,7 +23,7 @@ class SensorViewSetTestCase(BaseTestCase):
         self.assertEqual(Sensor.objects.get().integration, self.integration)
 
     def test_create_sensor_with_invalid_secret(self):
-        """Test the API returns an error when creating a sensor object with an invalid secret."""
+        """Test when creating a sensor object with an invalid secret."""
         data = {
             'secret': 'invalid_secret',
             'local_temp': 25.5,
@@ -34,10 +34,11 @@ class SensorViewSetTestCase(BaseTestCase):
         self.assertEqual(Sensor.objects.count(), 1)
         self.assertEqual(Sensor.objects.get().local_temp, 25.5)
         self.assertEqual(Sensor.objects.get().local_humid, 60.0)
-        self.assertEqual(Sensor.objects.get().integration.secret == 'invalid_secret', True)
+        self.assertEqual(Sensor.objects.get().integration.secret
+                         == 'invalid_secret', True)
 
     def test_create_sensor_with_missing_data(self):
-        """Test the API returns an error when creating a sensor object with missing data."""
+        """Test when creating a sensor object with missing data."""
         data = {
             'secret': self.secret,
             'local_temp': 25.5
@@ -47,7 +48,7 @@ class SensorViewSetTestCase(BaseTestCase):
         self.assertEqual(Sensor.objects.count(), 0)
 
     def test_create_sensor_with_invalid_data_type(self):
-        """Test the API returns an error when creating a sensor object with invalid data type."""
+        """Test when creating a sensor object with invalid data type."""
         data = {
             'secret': self.secret,
             'local_temp': 'invalid',
