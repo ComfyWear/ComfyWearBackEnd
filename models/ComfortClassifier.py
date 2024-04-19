@@ -2,6 +2,7 @@
 import joblib
 import numpy as np
 import pandas as pd
+from typing import List, Tuple
 
 
 class ComfortClassifier:
@@ -17,7 +18,7 @@ class ComfortClassifier:
         self.classifier = joblib.load("models/weights/mlp_model.pkl")
         self.columns = pd.read_csv("models/model_resources/data.csv").columns[:-1]
 
-    def predict_comfort_level(self, labels: list[tuple], local_temp: float,
+    def predict_comfort_level(self, labels: List[Tuple], local_temp: float,
                               local_humid: float) -> list:
         """
         Predict the comfort level.
