@@ -38,7 +38,7 @@ class ComfortClassifier:
         comfort_levels: np.ndarray = self.classifier.predict(input_df)
         return comfort_levels.tolist()
 
-    def _prepare_input_data(self, labels: list[tuple], local_temp: float,
+    def _prepare_input_data(self, labels: List[Tuple], local_temp: float,
                             local_humid: float) -> list:
         """
         Prepare the input data for comfort level prediction.
