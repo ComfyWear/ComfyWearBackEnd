@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/migrations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/comfort.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/comfort.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/integration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/prediction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/sensor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/serializers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_comfort.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_comfort.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_integrate.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_integrate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_predict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_sensor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/ComfortViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/ComfortViewSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/IntegrateViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/IntegrateViewSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/SensorViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/SensorViewSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
