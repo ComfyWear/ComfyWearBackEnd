@@ -27,7 +27,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Flake8
       run: |
-        flake8 app --exclude='/migrations/'
+        flake8 app --exclude='*/migrations/*'
     - name: Run Tests
       run: |
         python manage.py test app.tests
