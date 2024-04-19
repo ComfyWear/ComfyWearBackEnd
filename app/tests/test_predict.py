@@ -2,7 +2,6 @@
 from rest_framework import status
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from app.models import Prediction
 from app.tests import BaseTestCase
 
 
