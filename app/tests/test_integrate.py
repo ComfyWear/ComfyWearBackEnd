@@ -243,3 +243,154 @@ class IntegrationViewSetTestCase(BaseTestCase):
         }
 
         self.assertEqual(response.data, expected_data)
+
+    def test_comfort_level_distribution_all(self):
+        """
+        Test the API can retrieve the comfort level distribution for all comfort levels.
+
+        The API should return the comfort level distribution
+        based on all available comfort data.
+        """
+        response = self.client.get(self.comfort_level_distribution_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        expected_data = {
+            'comfort_level_distribution': [
+                {'comfort': "1", 'count': 1},
+                {'comfort': "2", 'count': 1},
+                {'comfort': "3", 'count': 1},
+                {'comfort': "4", 'count': 1}
+            ]
+        }
+
+        self.assertEqual(response.data, expected_data)
+
+    def test_comfort_level_distribution_specific(self):
+        """
+        Test the API can retrieve the comfort level distribution for a specific comfort level.
+
+        The API should return the comfort level distribution
+        for the specified comfort level.
+        """
+        comfort_level = 2
+        url = f"{self.comfort_level_distribution_url}{comfort_level}/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        expected_data = {
+            'comfort_level_distribution': [
+                {'comfort': "2", 'count': 1}
+            ]
+        }
+
+        self.assertEqual(response.data, expected_data)
+
+    def test_comfort_level_details_all(self):
+        """
+        Test the API can retrieve the comfort level details for all comfort levels.
+
+        The API should return the comfort level details
+        based on all available comfort data.
+        """
+        response = self.client.get(self.comfort_level_details_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        expected_data = {
+            'comfort_level_details': {
+                "1": {
+                    'count': 1,
+                    'avg_temp': 25.75,
+                    'avg_humid': 62.5,
+                    'upper_labels': {'T-shirt': 1},
+                    'lower_labels': {'Shorts': 1}
+                },
+                "2": {
+                    'count': 1,
+                    'avg_temp': 25.75,
+                    'avg_humid': 62.5,
+                    'upper_labels': {'Jacket': 1},
+                    'lower_labels': {'Jeans': 1}
+                },
+                "3": {
+                    'count': 1,
+                    'avg_temp': 25.75,
+                    'avg_humid': 62.5,
+                    'upper_labels': {None: 1},
+                    'lower_labels': {None: 1}
+                },
+                "4": {
+                    'count': 1,
+                    'avg_temp': 25.75,
+                    'avg_humid': 62.5,
+                    'upper_labels': {None: 1},
+                    'lower_labels': {None: 1}
+                }
+            }
+        }
+
+        self.assertEqual(response.data, expected_data)
+
+    def test_comfort_level_details_specific(self):
+        """
+        Test the API can retrieve the comfort level details for a specific comfort level.
+
+        The API should return the comfort level details
+        for the specified comfort level.
+        """
+        comfort_level = 1
+        url = f"{self.comfort_level_details_url}{comfort_level}/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        expected_data = {
+            'comfort_level_details': {
+                "1": {
+                    'count': 1,
+                    'avg_temp': 25.75,
+                    'avg_humid': 62.5,
+                    'upper_labels': {'T-shirt': 1},
+                    'lower_labels': {'Shorts': 1}
+                }
+            }
+        }
+
+        self.assertEqual(response.data, expected_data)
+
+    def test_label_counts_all(self):
+        """
+        Test the API can retrieve the clothing label counts for all labels.
+
+        The API should return the counts of each clothing label
+        based on all available prediction data.
+        """
+        response = self.client.get(self.label_counts_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        expected_data = {
+            'label_counts': {
+                'T-shirt': 1,
+                'Shorts': 1,
+                'Jacket': 1,
+                'Jeans': 1
+            }
+        }
+
+        self.assertEqual(response.data, expected_data)
+
+    def test_label_counts_specific(self):
+        """
+        Test the API can retrieve the count for a specific clothing label.
+
+        The API should return the count for the specified clothing label
+        based on all available prediction data.
+        """
+        label = 'T-shirt'
+        url = f"{self.label_counts_url}{label}/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        expected_data = {
+            'T-shirt': 1
+        }
+
+        self.assertEqual(response.data, expected_data)
