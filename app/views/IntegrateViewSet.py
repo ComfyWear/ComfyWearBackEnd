@@ -54,6 +54,39 @@ class IntegrateViewSet(viewsets.ViewSet):
 
         return Response(response_data)
 
+    def avg_comfort_level(self, request: Request) -> Response:
+        comfort_data = Comfort.objects.all().order_by("timestamp")
+        avg_comfort_level = self._get_average_comfort_level(comfort_data)
+        return Response({'avg_comfort_level': avg_comfort_level})
+
+    def comfort_level_distribution(self, request: Request,
+                                   comfort: int = None) -> Response:
+        comfort_data = Comfort.objects.all().order_by("timestamp")
+        if comfort:
+            comfort_data = comfort_data.filter(comfort=comfort)
+        comfort_level_distribution = self._get_comfort_level_distribution(
+            comfort_data)
+        return Response(
+            {'comfort_level_distribution': comfort_level_distribution})
+
+    def comfort_level_details(self, request: Request,
+                              comfort: int = None) -> Response:
+        comfort_data = Comfort.objects.all().order_by("timestamp")
+        if comfort:
+            comfort_data = comfort_data.filter(comfort=comfort)
+        integration_data = self._group_data_by_integration(comfort_data)
+        comfort_level_details = self._get_comfort_level_details(
+            integration_data)
+        return Response({'comfort_level_details': comfort_level_details})
+
+    def label_counts(self, request: Request, label: str = None) -> Response:
+        label_counts = self._get_label_counts()
+        if label:
+            count = label_counts.get(label, 0)
+            return Response({label: count})
+        else:
+            return Response({'label_counts': label_counts})
+
     def _get_average_comfort_level(self, comfort_data: Comfort) -> float:
         """
         Get the average comfort level.
