@@ -16,7 +16,6 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install jq
-        git-lfs pull
 
     - name: Install Dependencies
       run: |
