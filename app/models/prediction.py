@@ -2,7 +2,7 @@
 from django.db import models
 
 from utils.abstract_model import AbstractModel
-from app.models.integration import Integration
+from app.models.integrate import Integrate
 
 
 class Prediction(AbstractModel):
@@ -31,7 +31,7 @@ class Prediction(AbstractModel):
         help_text="Lower of the predicted object"
     )
     integration = models.ForeignKey(
-        Integration, on_delete=models.CASCADE,
+        Integrate, on_delete=models.CASCADE,
         related_name='predictions', null=True
     )
 

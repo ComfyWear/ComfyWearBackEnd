@@ -1,7 +1,7 @@
 """This module defines the test suite for the IntegrationViewSet."""
 from rest_framework import status
 
-from app.models import Comfort, Sensor, Prediction, Integration
+from app.models import Comfort, Sensor, Prediction, Integrate
 from app.tests import BaseTestCase
 
 
@@ -12,7 +12,7 @@ class IntegrationViewSetTestCase(BaseTestCase):
         """Define the test client and other test variables."""
         super().setUp()
         self.maxDiff = None
-        self.integration = Integration.objects.create()
+        self.integration = Integrate.objects.create()
 
         self.comfort1 = Comfort.objects.create(
             comfort="1",

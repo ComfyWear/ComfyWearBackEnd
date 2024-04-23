@@ -2,7 +2,7 @@
 from django.db import models
 
 from utils.abstract_model import AbstractModel
-from app.models.integration import Integration
+from app.models.integrate import Integrate
 
 
 class Sensor(AbstractModel):
@@ -31,7 +31,7 @@ class Sensor(AbstractModel):
         null=True, blank=True, help_text="Local humidity reading"
     )
     integration = models.ForeignKey(
-        Integration, on_delete=models.CASCADE, related_name='sensors',
+        Integrate, on_delete=models.CASCADE, related_name='sensors',
         null=True
     )
 

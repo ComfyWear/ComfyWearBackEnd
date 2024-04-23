@@ -1,7 +1,7 @@
 """This module defines the test suite for the IntegrationViewSet."""
 from rest_framework.test import APIClient, APITestCase
 
-from app.models import Integration
+from app.models import Integrate
 
 
 class BaseTestCase(APITestCase):
@@ -10,7 +10,7 @@ class BaseTestCase(APITestCase):
     def setUp(self):
         """Define the test client and other test variables."""
         self.secret = 'test_secret'
-        self.integration = Integration.objects.create(secret=self.secret)
+        self.integration = Integrate.objects.create(secret=self.secret)
 
         self.comfort_url = "/app/api/comfort/"
         self.sensor_url = "/app/api/sensor/"

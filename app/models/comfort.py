@@ -2,7 +2,7 @@
 from django.db import models
 
 from utils.abstract_model import AbstractModel
-from app.models.integration import Integration
+from app.models.integrate import Integrate
 
 
 class Comfort(AbstractModel):
@@ -27,7 +27,7 @@ class Comfort(AbstractModel):
         help_text="Comfort level descriptor"
     )
     integration = models.ForeignKey(
-        Integration, on_delete=models.CASCADE, related_name='comforts',
+        Integrate, on_delete=models.CASCADE, related_name='comforts',
         null=True
     )
 

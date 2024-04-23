@@ -4,7 +4,7 @@ from django.db import models
 from utils.abstract_model import AbstractModel
 
 
-class Integration(AbstractModel):
+class Integrate(AbstractModel):
     """
     A collection of related data for a particular integration.
 

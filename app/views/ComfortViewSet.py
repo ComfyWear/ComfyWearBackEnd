@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from app.serializers import ComfortSerializer
-from app.models import Integration, Comfort
+from app.models import Integrate, Comfort
 
 
 class ComfortViewSet(viewsets.ViewSet):
@@ -21,7 +21,7 @@ class ComfortViewSet(viewsets.ViewSet):
         """
         secret = request.data.get('secret')
         comfort = request.data.get('comfort')
-        integration = Integration.objects.filter(secret=secret).first()
+        integration = Integrate.objects.filter(secret=secret).first()
 
         if integration and comfort:
             serializer = ComfortSerializer(data=request.data)

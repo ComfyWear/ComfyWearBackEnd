@@ -12,7 +12,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from app.models import Integration, Prediction, Image, Sensor
+from app.models import Integrate, Prediction, Image, Sensor
 from app.serializers import PredictionSerializer, ImageSerializer, \
     SensorSerializer, ComfortSerializer
 from models import ImageSegmentation, ComfortClassifier
@@ -58,18 +58,18 @@ class PredictViewSet(viewsets.ViewSet):
         return Response({'error': 'Missing required data'},
                         status=status.HTTP_400_BAD_REQUEST)
 
-    def _get_or_create_integration(self, secret: str) -> Integration:
+    def _get_or_create_integration(self, secret: str) -> Integrate:
         """
         Get or create an Integration object based on the secret.
 
         :param secret: The secret key for the integration.
         :type secret: str
         :return: The Integration object.
-        :rtype: app.models.Integration
+        :rtype: app.models.Integrate
         """
-        integration = Integration.objects.filter(secret=secret).first()
+        integration = Integrate.objects.filter(secret=secret).first()
         if not integration:
-            integration = Integration.objects.create(secret=secret)
+            integration = Integrate.objects.create(secret=secret)
         return integration
 
     def _save_image(self, image_file: ContentFile) -> str:
@@ -99,14 +99,14 @@ class PredictViewSet(viewsets.ViewSet):
         return annotated_image, labels
 
     def _save_predictions(self, labels: list,
-                          integration: Integration) -> None:
+                          integration: Integrate) -> None:
         """
         Save the predicted labels.
 
         :param labels: The predicted labels.
         :type labels: list
         :param integration: The Integration object.
-        :type integration: app.models.Integration
+        :type integration: app.models.Integrate
         """
         for upper, lower in labels:
             prediction_serializer = PredictionSerializer(
@@ -116,7 +116,7 @@ class PredictViewSet(viewsets.ViewSet):
 
     def _save_annotated_image(self, annotated_image: np.ndarray,
                               request: Request,
-                              integration: Integration) -> None:
+                              integration: Integrate) -> None:
         """
         Save the annotated image.
 
@@ -125,7 +125,7 @@ class PredictViewSet(viewsets.ViewSet):
         :param request: The HTTP request.
         :type request: rest_framework.request.Request
         :param integration: The Integration object.
-        :type integration: app.models.Integration
+        :type integration: app.models.Integrate
         """
         _, frame = cv2.imencode('.png', annotated_image)
         img_file = ContentFile(frame.tobytes())
@@ -155,7 +155,7 @@ class PredictViewSet(viewsets.ViewSet):
     def _predict_comfort_level(self, labels: list,
                                local_temp: float,
                                local_humid: float,
-                               integration: Integration) -> list:
+                               integration: Integrate) -> list:
         """
         Predict the comfort level based on labels, temperature, and humidity.
 
@@ -166,7 +166,7 @@ class PredictViewSet(viewsets.ViewSet):
         :param local_humid: The local humidity.
         :type local_humid: float
         :param integration: The Integration object.
-        :type integration: app.models.Integration
+        :type integration: app.models.Integrate
         :return: The predicted comfort levels.
         :rtype: list
         """
@@ -183,13 +183,13 @@ class PredictViewSet(viewsets.ViewSet):
                 raise Exception(comfort_serializer.errors)
         return comfort_data
 
-    def _get_response_data(self, integration: Integration,
+    def _get_response_data(self, integration: Integrate,
                            request: Request) -> dict:
         """
         Get the response data for the given integration.
 
         :param integration: The Integration object.
-        :type integration: app.models.Integration
+        :type integration: app.models.Integrate
         :param request: The HTTP request.
         :type request: rest_framework.request.Request
         :return: The response data.
@@ -207,12 +207,12 @@ class PredictViewSet(viewsets.ViewSet):
         }
         return response_data
 
-    def _get_sensor_data(self, integration: Integration) -> tuple:
+    def _get_sensor_data(self, integration: Integrate) -> tuple:
         """
         Get the sensor data for the given integration.
 
         :param integration: The Integration object.
-        :type integration: app.models.Integration
+        :type integration: app.models.Integrate
         :return: The local temperature and humidity.
         :rtype: tuple(float, float)
         """

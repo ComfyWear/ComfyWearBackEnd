@@ -2,7 +2,7 @@
 from django.db import models
 
 from utils.abstract_model import AbstractModel
-from app.models.integration import Integration
+from app.models.integrate import Integrate
 
 
 class Image(AbstractModel):
@@ -26,7 +26,7 @@ class Image(AbstractModel):
         upload_to='detected_images/', null=True, blank=True
     )
     integration = models.ForeignKey(
-        Integration, on_delete=models.CASCADE, related_name='images', null=True
+        Integrate, on_delete=models.CASCADE, related_name='images', null=True
     )
 
     class Meta:

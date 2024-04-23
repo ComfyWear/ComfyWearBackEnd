@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from app.serializers import SensorSerializer
-from app.models import Integration
+from app.models import Integrate
 
 
 class SensorViewSet(viewsets.ViewSet):
@@ -24,10 +24,10 @@ class SensorViewSet(viewsets.ViewSet):
         local_humid = request.data.get('local_humid')
 
         if secret and local_temp and local_humid:
-            integration = Integration.objects.filter(secret=secret).first()
+            integration = Integrate.objects.filter(secret=secret).first()
 
             if not integration:
-                integration = Integration.objects.create(secret=secret)
+                integration = Integrate.objects.create(secret=secret)
 
             serializer = SensorSerializer(data=request.data)
             if serializer.is_valid():
