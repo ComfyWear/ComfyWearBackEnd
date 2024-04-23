@@ -55,12 +55,30 @@ class IntegrateViewSet(viewsets.ViewSet):
         return Response(response_data)
 
     def avg_comfort_level(self, request: Request) -> Response:
+        """
+        Get the average comfort level.
+
+        :param request: The HTTP request.
+        :type request: rest_framework.request.Request
+        :return: The average comfort level.
+        :rtype: rest_framework.response.Response
+        """
         comfort_data = Comfort.objects.all().order_by("timestamp")
         avg_comfort_level = self._get_average_comfort_level(comfort_data)
         return Response({'avg_comfort_level': avg_comfort_level})
 
     def comfort_level_distribution(self, request: Request,
                                    comfort: int = None) -> Response:
+        """
+        Get the comfort level distribution.
+
+        :param request: The HTTP request.
+        :type request: rest_framework.request.Request
+        :param comfort: Optional comfort level to filter the distribution.
+        :type comfort: int, optional
+        :return: The comfort level distribution.
+        :rtype: rest_framework.response.Response
+        """
         comfort_data = Comfort.objects.all().order_by("timestamp")
         if comfort:
             comfort_data = comfort_data.filter(comfort=comfort)
@@ -71,6 +89,16 @@ class IntegrateViewSet(viewsets.ViewSet):
 
     def comfort_level_details(self, request: Request,
                               comfort: int = None) -> Response:
+        """
+        Get the comfort level details.
+
+        :param request: The HTTP request.
+        :type request: rest_framework.request.Request
+        :param comfort: Optional comfort level to filter the details.
+        :type comfort: int, optional
+        :return: The comfort level details.
+        :rtype: rest_framework.response.Response
+        """
         comfort_data = Comfort.objects.all().order_by("timestamp")
         if comfort:
             comfort_data = comfort_data.filter(comfort=comfort)
@@ -80,6 +108,16 @@ class IntegrateViewSet(viewsets.ViewSet):
         return Response({'comfort_level_details': comfort_level_details})
 
     def label_counts(self, request: Request, label: str = None) -> Response:
+        """
+        Get the clothing label counts.
+
+        :param request: The HTTP request.
+        :type request: rest_framework.request.Request
+        :param label: Optional label to get the count for.
+        :type label: str, optional
+        :return: The clothing label counts or count for a specific label.
+        :rtype: rest_framework.response.Response
+        """
         label_counts = self._get_label_counts()
         if label:
             count = label_counts.get(label, 0)
@@ -99,7 +137,7 @@ class IntegrateViewSet(viewsets.ViewSet):
         return comfort_data.aggregate(Avg('comfort'))['comfort__avg']
 
     def _get_comfort_level_distribution(self, comfort_data: Comfort) -> List[
-            Dict[str, int]]:
+        Dict[str, int]]:
         """
         Get the comfort level distribution.
 
@@ -112,7 +150,7 @@ class IntegrateViewSet(viewsets.ViewSet):
             comfort_data.values('comfort').annotate(count=Count('comfort')))
 
     def _group_data_by_integration(self, comfort_data: Comfort) -> Dict[
-            int, Dict[str, List]]:
+        int, Dict[str, List]]:
         """
         Group the comfort data by integration.
 
@@ -157,7 +195,7 @@ class IntegrateViewSet(viewsets.ViewSet):
         return integration_data
 
     def _get_comfort_level_details(self, integration_data: Dict[
-            int, Dict[str, List]]) -> Dict[int, Dict[str, object]]:
+        int, Dict[str, List]]) -> Dict[int, Dict[str, object]]:
         """
         Get the comfort level details.
 
@@ -198,7 +236,7 @@ class IntegrateViewSet(viewsets.ViewSet):
                         humidities) / len(humidities)
 
                 if upper_label in comfort_level_details[comfort_level][
-                        'upper_labels']:
+                    'upper_labels']:
                     comfort_level_details[comfort_level]['upper_labels'][
                         upper_label] += 1
                 else:
@@ -206,7 +244,7 @@ class IntegrateViewSet(viewsets.ViewSet):
                         upper_label] = 1
 
                 if lower_label in comfort_level_details[comfort_level][
-                        'lower_labels']:
+                    'lower_labels']:
                     comfort_level_details[comfort_level]['lower_labels'][
                         lower_label] += 1
                 else:

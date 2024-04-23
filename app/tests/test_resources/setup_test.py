@@ -16,8 +16,10 @@ class BaseTestCase(APITestCase):
         self.sensor_url = "/app/api/sensor/"
         self.predict_url = "/app/api/predict/"
         self.integrate_url = "/app/api/integrate/"
-        self.comfort_level_distribution_url = "/app/api/integrate/comfort-level-distribution/"
-        self.comfort_level_details_url = "/app/api/integrate/comfort-level-details/"
+        self.comfort_level_distribution_url = "/app/api/integrate/" \
+                                              "comfort-level-distribution/"
+        self.comfort_level_details_url = "/app/api/integrate/" \
+                                         "comfort-level-details/"
         self.label_counts_url = "/app/api/integrate/label-counts/"
 
         self.client = APIClient()

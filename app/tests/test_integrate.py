@@ -246,7 +246,7 @@ class IntegrationViewSetTestCase(BaseTestCase):
 
     def test_comfort_level_distribution_all(self):
         """
-        Test the API can retrieve the comfort level distribution for all comfort levels.
+        Test retrieve the comfort level distribution for all comfort levels.
 
         The API should return the comfort level distribution
         based on all available comfort data.
@@ -267,7 +267,7 @@ class IntegrationViewSetTestCase(BaseTestCase):
 
     def test_comfort_level_distribution_specific(self):
         """
-        Test the API can retrieve the comfort level distribution for a specific comfort level.
+        Test retrieve the comfort level distribution for a specific level.
 
         The API should return the comfort level distribution
         for the specified comfort level.
@@ -287,7 +287,7 @@ class IntegrationViewSetTestCase(BaseTestCase):
 
     def test_comfort_level_details_all(self):
         """
-        Test the API can retrieve the comfort level details for all comfort levels.
+        Test retrieve the comfort level details for all comfort levels.
 
         The API should return the comfort level details
         based on all available comfort data.
@@ -332,7 +332,7 @@ class IntegrationViewSetTestCase(BaseTestCase):
 
     def test_comfort_level_details_specific(self):
         """
-        Test the API can retrieve the comfort level details for a specific comfort level.
+        Test retrieve the comfort level details for a specific comfort level.
 
         The API should return the comfort level details
         for the specified comfort level.
