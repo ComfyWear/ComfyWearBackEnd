@@ -179,7 +179,7 @@ class IntegrateViewSet(viewsets.ViewSet):
         return comfort_data.aggregate(Avg('comfort'))['comfort__avg']
 
     def _get_comfort_level_distribution(self, comfort_data: Comfort) -> List[
-        Dict[str, int]]:
+            Dict[str, int]]:
         """
         Get the comfort level distribution.
 
