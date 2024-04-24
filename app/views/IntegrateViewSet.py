@@ -179,7 +179,7 @@ class IntegrateViewSet(viewsets.ViewSet):
         return comfort_data.aggregate(Avg('comfort'))['comfort__avg']
 
     def _get_comfort_level_distribution(self, comfort_data: Comfort) -> List[
-            Dict[str, int]]:
+        Dict[str, int]]:
         """
         Get the comfort level distribution.
 
@@ -188,8 +188,17 @@ class IntegrateViewSet(viewsets.ViewSet):
         :return: The comfort level distribution.
         :rtype: List[Dict[str, int]]
         """
-        return list(
-            comfort_data.values('comfort').annotate(count=Count('comfort')))
+        comfort_level_distribution = list(
+            comfort_data.values('comfort').annotate(
+                count=Count('comfort')).order_by('comfort')
+        )
+        unique_comfort_levels = {}
+        for entry in comfort_level_distribution:
+            comfort = entry['comfort']
+            if comfort not in unique_comfort_levels:
+                unique_comfort_levels[comfort] = entry
+
+        return list(unique_comfort_levels.values())
 
     def _group_data_by_integrate(self, comfort_data: Comfort) -> Dict[
             int, Dict[str, List]]:
