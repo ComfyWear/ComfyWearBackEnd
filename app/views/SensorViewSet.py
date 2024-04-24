@@ -14,7 +14,7 @@ class SensorViewSet(viewsets.ViewSet):
 
     def create(self, request):
         """
-        Create a new Sensor object for a specific integration.
+        Create a new Sensor object for a specific integrate.
 
         :param request: The HTTP request with task data.
         :return: Response with created task or error.
@@ -24,14 +24,14 @@ class SensorViewSet(viewsets.ViewSet):
         local_humid = request.data.get('local_humid')
 
         if secret and local_temp and local_humid:
-            integration = Integrate.objects.filter(secret=secret).first()
+            integrate = Integrate.objects.filter(secret=secret).first()
 
-            if not integration:
-                integration = Integrate.objects.create(secret=secret)
+            if not integrate:
+                integrate = Integrate.objects.create(secret=secret)
 
             serializer = SensorSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save(integration=integration)
+                serializer.save(integrate=integrate)
                 return Response(serializer.data,
                                 status=status.HTTP_201_CREATED)
             return Response(serializer.errors,

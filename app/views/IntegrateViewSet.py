@@ -34,9 +34,9 @@ class IntegrateViewSet(viewsets.ViewSet):
             avg_comfort_level = self._get_average_comfort_level(comfort_data)
             comfort_level_distribution = self._get_comfort_level_distribution(
                 comfort_data)
-            integration_data = self._group_data_by_integration(comfort_data)
+            integrate_data = self._group_data_by_integrate(comfort_data)
             comfort_level_details = self._get_comfort_level_details(
-                integration_data)
+                integrate_data)
             label_counts = self._get_label_counts()
 
             response_data = {
@@ -103,9 +103,9 @@ class IntegrateViewSet(viewsets.ViewSet):
         comfort_data = Comfort.objects.all().order_by("timestamp")
         if comfort:
             comfort_data = comfort_data.filter(comfort=comfort)
-        integration_data = self._group_data_by_integration(comfort_data)
+        integrate_data = self._group_data_by_integrate(comfort_data)
         comfort_level_details = self._get_comfort_level_details(
-            integration_data)
+            integrate_data)
         return Response({'comfort_level_details': comfort_level_details})
 
     def label_counts(self, request: Request, label: str = None) -> Response:
@@ -141,12 +141,12 @@ class IntegrateViewSet(viewsets.ViewSet):
         data = []
 
         for comfort in comfort_data:
-            integration = comfort.integration
+            integrate = comfort.integrate
             comfort_level = comfort.comfort
 
             try:
                 sensor = sensor_data.filter(
-                    integration=comfort.integration).latest('timestamp')
+                    integrate=comfort.integrate).latest('timestamp')
 
                 local_temp = sensor.local_temp
                 local_humid = sensor.local_humid
@@ -191,21 +191,21 @@ class IntegrateViewSet(viewsets.ViewSet):
         return list(
             comfort_data.values('comfort').annotate(count=Count('comfort')))
 
-    def _group_data_by_integration(self, comfort_data: Comfort) -> Dict[
+    def _group_data_by_integrate(self, comfort_data: Comfort) -> Dict[
             int, Dict[str, List]]:
         """
-        Group the comfort data by integration.
+        Group the comfort data by integrate.
 
         :param comfort_data: The comfort data queryset.
         :type comfort_data: django.db.models.QuerySet
-        :return: The grouped data by integration.
+        :return: The grouped data by integrate.
         :rtype: Dict[int, Dict[str, List]]
         """
-        integration_data = {}
+        integrate_data = {}
         for comfort in comfort_data:
-            integration = comfort.integration
-            if integration not in integration_data:
-                integration_data[integration] = {
+            integrate = comfort.integrate
+            if integrate not in integrate_data:
+                integrate_data[integrate] = {
                     'comfort_levels': [],
                     'upper_labels': [],
                     'lower_labels': [],
@@ -214,40 +214,40 @@ class IntegrateViewSet(viewsets.ViewSet):
                 }
 
                 predictions = Prediction.objects.filter(
-                    integration=integration).order_by('timestamp')
+                    integrate=integrate).order_by('timestamp')
                 for prediction in predictions:
-                    integration_data[integration]['upper_labels'].append(
+                    integrate_data[integrate]['upper_labels'].append(
                         prediction.predicted_upper)
-                    integration_data[integration]['lower_labels'].append(
+                    integrate_data[integrate]['lower_labels'].append(
                         prediction.predicted_lower)
 
                 sensors = Sensor.objects.filter(
-                    integration=integration).order_by("timestamp")
+                    integrate=integrate).order_by("timestamp")
                 for sensor in sensors:
                     if sensor.local_temp:
-                        integration_data[integration]['temperatures'].append(
+                        integrate_data[integrate]['temperatures'].append(
                             sensor.local_temp)
                     if sensor.local_humid:
-                        integration_data[integration]['humidities'].append(
+                        integrate_data[integrate]['humidities'].append(
                             sensor.local_humid)
 
-            integration_data[integration]['comfort_levels'].append(
+            integrate_data[integrate]['comfort_levels'].append(
                 comfort.comfort)
 
-        return integration_data
+        return integrate_data
 
-    def _get_comfort_level_details(self, integration_data: Dict[
+    def _get_comfort_level_details(self, integrate_data: Dict[
             int, Dict[str, List]]) -> Dict[int, Dict[str, object]]:
         """
         Get the comfort level details.
 
-        :param integration_data: The grouped data by integration.
-        :type integration_data: Dict[int, Dict[str, List]]
+        :param integrate_data: The grouped data by integrate.
+        :type integrate_data: Dict[int, Dict[str, List]]
         :return: The comfort level details.
         :rtype: Dict[int, Dict[str, object]]
         """
         comfort_level_details = {}
-        for data in integration_data.values():
+        for data in integrate_data.values():
             comfort_levels = data['comfort_levels']
             upper_labels = data['upper_labels']
             lower_labels = data['lower_labels']

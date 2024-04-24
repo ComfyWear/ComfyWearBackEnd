@@ -14,19 +14,19 @@ class ComfortViewSet(viewsets.ViewSet):
 
     def create(self, request):
         """
-        Create a new Comfort object for a specific integration.
+        Create a new Comfort object for a specific integrate.
 
         :param request: The HTTP request with prediction data.
         :return: Response with created prediction or error.
         """
         secret = request.data.get('secret')
         comfort = request.data.get('comfort')
-        integration = Integrate.objects.filter(secret=secret).first()
+        integrate = Integrate.objects.filter(secret=secret).first()
 
-        if integration and comfort:
+        if integrate and comfort:
             serializer = ComfortSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save(integration=integration)
+                serializer.save(integrate=integrate)
                 return Response(serializer.data,
                                 status=status.HTTP_201_CREATED)
             return Response(serializer.errors,

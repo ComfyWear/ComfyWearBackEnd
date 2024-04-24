@@ -1,52 +1,52 @@
-"""This module defines the test suite for the IntegrationViewSet."""
+"""This module defines the test suite for the IntegratenViewSet."""
 from rest_framework import status
 
 from app.models import Comfort, Sensor, Prediction, Integrate
 from app.tests import BaseTestCase
 
 
-class IntegrationViewSetTestCase(BaseTestCase):
-    """This class defines the test suite for the IntegrationViewSet."""
+class IntegrateViewSetTestCase(BaseTestCase):
+    """This class defines the test suite for the IntegratenViewSet."""
 
     def setUp(self):
         """Define the test client and other test variables."""
         super().setUp()
         self.maxDiff = None
-        self.integration = Integrate.objects.create()
+        self.integrate = Integrate.objects.create()
 
         self.comfort1 = Comfort.objects.create(
             comfort="1",
-            integration=self.integration,
+            integrate=self.integrate,
             timestamp='2023-06-01T10:00:00Z')
         self.comfort2 = Comfort.objects.create(
             comfort="2",
-            integration=self.integration,
+            integrate=self.integrate,
             timestamp='2023-06-01T11:00:00Z')
         self.comfort3 = Comfort.objects.create(
             comfort="3",
-            integration=self.integration,
+            integrate=self.integrate,
             timestamp='2023-06-01T12:00:00Z')
         self.comfort4 = Comfort.objects.create(
             comfort="4",
-            integration=self.integration,
+            integrate=self.integrate,
             timestamp='2023-06-01T13:00:00Z')
 
         self.sensor1 = Sensor.objects.create(local_temp=25.5,
                                              local_humid=60,
-                                             integration=self.integration)
+                                             integrate=self.integrate)
         self.sensor2 = Sensor.objects.create(local_temp=26.0,
                                              local_humid=65.0,
-                                             integration=self.integration)
+                                             integrate=self.integrate)
 
         self.prediction1 = Prediction.objects.create(
             predicted_upper='T-shirt',
             predicted_lower='Shorts',
-            integration=self.integration,
+            integrate=self.integrate,
             timestamp='2023-06-01T10:00:00Z')
         self.prediction2 = Prediction.objects.create(
             predicted_upper='Jacket',
             predicted_lower='Jeans',
-            integration=self.integration,
+            integrate=self.integrate,
             timestamp='2023-06-01T11:00:00Z')
 
     def test_list_comfort_data(self):

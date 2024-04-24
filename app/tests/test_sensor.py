@@ -20,7 +20,7 @@ class SensorViewSetTestCase(BaseTestCase):
         self.assertEqual(Sensor.objects.count(), 1)
         self.assertEqual(Sensor.objects.get().local_temp, 25.5)
         self.assertEqual(Sensor.objects.get().local_humid, 60.0)
-        self.assertEqual(Sensor.objects.get().integration, self.integration)
+        self.assertEqual(Sensor.objects.get().integrate, self.integrate)
 
     def test_create_sensor_with_invalid_secret(self):
         """Test when creating a sensor object with an invalid secret."""
@@ -34,7 +34,7 @@ class SensorViewSetTestCase(BaseTestCase):
         self.assertEqual(Sensor.objects.count(), 1)
         self.assertEqual(Sensor.objects.get().local_temp, 25.5)
         self.assertEqual(Sensor.objects.get().local_humid, 60.0)
-        self.assertEqual(Sensor.objects.get().integration.secret
+        self.assertEqual(Sensor.objects.get().integrate.secret
                          == 'invalid_secret', True)
 
     def test_create_sensor_with_missing_data(self):

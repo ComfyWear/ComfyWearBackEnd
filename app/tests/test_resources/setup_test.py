@@ -10,7 +10,7 @@ class BaseTestCase(APITestCase):
     def setUp(self):
         """Define the test client and other test variables."""
         self.secret = 'test_secret'
-        self.integration = Integrate.objects.create(secret=self.secret)
+        self.integrate = Integrate.objects.create(secret=self.secret)
 
         self.comfort_url = "/app/api/comfort/"
         self.sensor_url = "/app/api/sensor/"

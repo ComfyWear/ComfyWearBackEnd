@@ -1,4 +1,4 @@
-"""This module defines the test suite for the IntegrationViewSet."""
+"""This module defines the test suite for the IntegrateViewSet."""
 from rest_framework import status
 
 from app.models import Comfort
@@ -18,7 +18,7 @@ class ComfortViewSetTestCase(BaseTestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Comfort.objects.count(), 1)
         self.assertEqual(Comfort.objects.get().comfort, 'Comfortable')
-        self.assertEqual(Comfort.objects.get().integration, self.integration)
+        self.assertEqual(Comfort.objects.get().integrate, self.integrate)
 
     def test_create_comfort_with_invalid_secret(self):
         """Test when creating a comfort object with an invalid secret."""

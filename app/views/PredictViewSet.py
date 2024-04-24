@@ -25,7 +25,7 @@ class PredictViewSet(viewsets.ViewSet):
 
     def create(self, request) -> Response:
         """
-        Create a new Prediction object for a specific integration.
+        Create a new Prediction object for a specific integrate.
 
         :param request: The HTTP request with prediction data.
         :type request: rest_framework.request.Request
@@ -36,19 +36,19 @@ class PredictViewSet(viewsets.ViewSet):
         image_file = request.data.get('image')
 
         if secret and self._isvalid(image_file):
-            integration = self._get_or_create_integration(secret)
+            integrate = self._get_or_create_integrate(secret)
             image_path = self._save_image(image_file)
             annotated_image, labels = self._segment_image(image_path)
-            self._save_predictions(labels, integration)
-            self._save_annotated_image(annotated_image, request, integration)
-            response_data = self._get_response_data(integration, request)
+            self._save_predictions(labels, integrate)
+            self._save_annotated_image(annotated_image, request, integrate)
+            response_data = self._get_response_data(integrate, request)
 
-            local_temp, local_humid = self._get_sensor_data(integration)
+            local_temp, local_humid = self._get_sensor_data(integrate)
             if local_temp and local_humid:
                 comfort_levels = self._predict_comfort_level(labels,
                                                              local_temp,
                                                              local_humid,
-                                                             integration)
+                                                             integrate)
                 response_data['comfort_level'] = comfort_levels
 
             self._delete_excess_images('uploads')
@@ -58,19 +58,19 @@ class PredictViewSet(viewsets.ViewSet):
         return Response({'error': 'Missing required data'},
                         status=status.HTTP_400_BAD_REQUEST)
 
-    def _get_or_create_integration(self, secret: str) -> Integrate:
+    def _get_or_create_integrate(self, secret: str) -> Integrate:
         """
         Get or create an Integration object based on the secret.
 
-        :param secret: The secret key for the integration.
+        :param secret: The secret key for the integrate.
         :type secret: str
         :return: The Integration object.
         :rtype: app.models.Integrate
         """
-        integration = Integrate.objects.filter(secret=secret).first()
-        if not integration:
-            integration = Integrate.objects.create(secret=secret)
-        return integration
+        integrate = Integrate.objects.filter(secret=secret).first()
+        if not integrate:
+            integrate = Integrate.objects.create(secret=secret)
+        return integrate
 
     def _save_image(self, image_file: ContentFile) -> str:
         """
@@ -99,24 +99,24 @@ class PredictViewSet(viewsets.ViewSet):
         return annotated_image, labels
 
     def _save_predictions(self, labels: list,
-                          integration: Integrate) -> None:
+                          integrate: Integrate) -> None:
         """
         Save the predicted labels.
 
         :param labels: The predicted labels.
         :type labels: list
-        :param integration: The Integration object.
-        :type integration: app.models.Integrate
+        :param integrate: The Integration object.
+        :type integrate: app.models.Integrate
         """
         for upper, lower in labels:
             prediction_serializer = PredictionSerializer(
                 data={'predicted_upper': upper, 'predicted_lower': lower})
             if prediction_serializer.is_valid():
-                prediction_serializer.save(integration=integration)
+                prediction_serializer.save(integrate=integrate)
 
     def _save_annotated_image(self, annotated_image: np.ndarray,
                               request: Request,
-                              integration: Integrate) -> None:
+                              integrate: Integrate) -> None:
         """
         Save the annotated image.
 
@@ -124,8 +124,8 @@ class PredictViewSet(viewsets.ViewSet):
         :type annotated_image: numpy.ndarray
         :param request: The HTTP request.
         :type request: rest_framework.request.Request
-        :param integration: The Integration object.
-        :type integration: app.models.Integrate
+        :param integrate: The Integration object.
+        :type integrate: app.models.Integrate
         """
         _, frame = cv2.imencode('.png', annotated_image)
         img_file = ContentFile(frame.tobytes())
@@ -133,7 +133,7 @@ class PredictViewSet(viewsets.ViewSet):
         image_serializer = ImageSerializer(data={'detected_image': img_file},
                                            context={'request': request})
         if image_serializer.is_valid():
-            image_serializer.save(integration=integration)
+            image_serializer.save(integrate=integrate)
         else:
             raise Exception(image_serializer.errors)
 
@@ -155,7 +155,7 @@ class PredictViewSet(viewsets.ViewSet):
     def _predict_comfort_level(self, labels: list,
                                local_temp: float,
                                local_humid: float,
-                               integration: Integrate) -> list:
+                               integrate: Integrate) -> list:
         """
         Predict the comfort level based on labels, temperature, and humidity.
 
@@ -165,8 +165,8 @@ class PredictViewSet(viewsets.ViewSet):
         :type local_temp: float
         :param local_humid: The local humidity.
         :type local_humid: float
-        :param integration: The Integration object.
-        :type integration: app.models.Integrate
+        :param integrate: The Integration object.
+        :type integrate: app.models.Integrate
         :return: The predicted comfort levels.
         :rtype: list
         """
@@ -183,21 +183,21 @@ class PredictViewSet(viewsets.ViewSet):
                 raise Exception(comfort_serializer.errors)
         return comfort_data
 
-    def _get_response_data(self, integration: Integrate,
+    def _get_response_data(self, integrate: Integrate,
                            request: Request) -> dict:
         """
-        Get the response data for the given integration.
+        Get the response data for the given integrate.
 
-        :param integration: The Integration object.
-        :type integration: app.models.Integrate
+        :param integrate: The Integration object.
+        :type integrate: app.models.Integrate
         :param request: The HTTP request.
         :type request: rest_framework.request.Request
         :return: The response data.
         :rtype: dict
         """
-        predictions = Prediction.objects.filter(integration=integration)
-        images = Image.objects.filter(integration=integration)
-        sensors = Sensor.objects.filter(integration=integration)
+        predictions = Prediction.objects.filter(integrate=integrate)
+        images = Image.objects.filter(integrate=integrate)
+        sensors = Sensor.objects.filter(integrate=integrate)
 
         response_data = {
             'predictions': PredictionSerializer(predictions, many=True).data,
@@ -207,16 +207,16 @@ class PredictViewSet(viewsets.ViewSet):
         }
         return response_data
 
-    def _get_sensor_data(self, integration: Integrate) -> tuple:
+    def _get_sensor_data(self, integrate: Integrate) -> tuple:
         """
-        Get the sensor data for the given integration.
+        Get the sensor data for the given integrate.
 
-        :param integration: The Integration object.
-        :type integration: app.models.Integrate
+        :param integrate: The Integration object.
+        :type integrate: app.models.Integrate
         :return: The local temperature and humidity.
         :rtype: tuple(float, float)
         """
-        sensor_data = Sensor.objects.filter(integration=integration).first()
+        sensor_data = Sensor.objects.filter(integrate=integrate).first()
         if not sensor_data:
             return None, None
         return sensor_data.local_temp, sensor_data.local_humid
