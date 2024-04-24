@@ -14,24 +14,35 @@ class ComfortViewSet(viewsets.ViewSet):
 
     def create(self, request):
         """
-        Create a new Comfort object for a specific integrate.
+        Create new Comfort objects for a specific integrate.
 
         :param request: The HTTP request with prediction data.
-        :return: Response with created prediction or error.
+        :return: Response with created predictions or error.
         """
         secret = request.data.get('secret')
-        comfort = request.data.get('comfort')
+        comfort_string = request.data.get('comfort')
         integrate = Integrate.objects.filter(secret=secret).first()
 
-        if integrate and comfort:
-            serializer = ComfortSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save(integrate=integrate)
-                return Response(serializer.data,
-                                status=status.HTTP_201_CREATED)
-            return Response(serializer.errors,
-                            status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error': 'Invalid secret code'},
+        if integrate and comfort_string:
+            comfort_values = comfort_string.split(',')
+            comfort_values = [value.strip() for value in comfort_values]
+
+            created_comforts = []
+            for comfort_value in comfort_values:
+                data = {
+                    'comfort': comfort_value,
+                    'integrate': integrate.id
+                }
+                serializer = ComfortSerializer(data=data)
+                if serializer.is_valid():
+                    serializer.save(integrate=integrate)
+                    created_comforts.append(serializer.data)
+                else:
+                    return Response(serializer.errors,
+                                    status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(created_comforts, status=status.HTTP_201_CREATED)
+        return Response({'error': 'Invalid secret code or comfort values'},
                         status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):
