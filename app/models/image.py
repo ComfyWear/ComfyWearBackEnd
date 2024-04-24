@@ -15,8 +15,8 @@ class Image(AbstractModel):
 
     :param detected_image: The field for storing the uploaded image.
     :type detected_image: models.ImageField
-    :param integration: The foreign key to the associated integration.
-    :type integration: models.ForeignKey
+    :param integrate: The foreign key to the associated integrate.
+    :type integrate: models.ForeignKey
 
     :return: A string representation of the image UUID.
     :rtype: str

@@ -13,11 +13,12 @@ class Prediction(AbstractModel):
     auto-generated UUID as a primary key, a field for the type of
     prediction, and a foreign key to an associated image.
 
-    :param predicted_type: The type of object predicted.
-    :type predicted_type: models.CharField
-    :param integration: The foreign key to the associated integration.
-    :type integration: models.ForeignKey
-
+    :param predicted_upper: The upper of the predicted object.
+    :type predicted_upper: models.CharField
+    :param predicted_lower: The lower of the predicted object.
+    :type predicted_lower: models.CharField
+    :param integrate: The foreign key to the associated integrate.
+    :type integrate: models.ForeignKey
     :return: A string representation of the prediction type.
     :rtype: str
     """

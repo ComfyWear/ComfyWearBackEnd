@@ -11,12 +11,12 @@ class Comfort(AbstractModel):
 
     This model inherits from the AbstractModel and contains an
     auto-generated UUID as a primary key, a field for the comfort
-    level descriptor, and a foreign key to an associated integration.
+    level descriptor, and a foreign key to an associated integrate.
 
     :param comfort: The comfort level descriptor.
     :type comfort: models.CharField
-    :param integration: The foreign key to the associated integration.
-    :type integration: models.ForeignKey
+    :param integrate: The foreign key to the associated integrate.
+    :type integrate: models.ForeignKey
 
     :return: A string representation of the comfort level descriptor.
     :rtype: str

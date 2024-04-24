@@ -11,14 +11,14 @@ class Sensor(AbstractModel):
 
     This model inherits from the AbstractModel and contains an
     auto-generated UUID as a primary key, fields for local temperature
-    and humidity readings, and a foreign key to an associated integration.
+    and humidity readings, and a foreign key to an associated integrate.
 
     :param local_temp: The local temperature reading.
     :type local_temp: models.FloatField
     :param local_humid: The local humidity reading.
     :type local_humid: models.FloatField
-    :param integration: The foreign key to the associated integration.
-    :type integration: models.ForeignKey
+    :param integrate: The foreign key to the associated integrate.
+    :type integrate: models.ForeignKey
 
     :return: A string representation of the sensor UUID.
     :rtype: str
