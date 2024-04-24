@@ -1,4 +1,3 @@
-# api_router.py
 """A module that defines the URL configuration for the app."""
 from django.conf import settings
 from django.urls import path
@@ -40,7 +39,4 @@ urlpatterns = [
     path('integrate/label-counts/<str:label>/',
          IntegrateViewSet.as_view({'get': 'label_counts'}),
          name='label-count-detail'),
-    path('integrate/correlation/',
-         IntegrateViewSet.as_view({'get': 'correlation'}),
-         name='correlation'),
 ]

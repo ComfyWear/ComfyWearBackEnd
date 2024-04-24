@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/IntegrateViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/IntegrateViewSet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +109,7 @@
       <workItem from="1713669165137" duration="1666000" />
       <workItem from="1713675857605" duration="611000" />
       <workItem from="1713772476391" duration="672000" />
-      <workItem from="1713840069614" duration="16593000" />
+      <workItem from="1713840069614" duration="16994000" />
     </task>
     <servers />
   </component>

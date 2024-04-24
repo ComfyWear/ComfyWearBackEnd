@@ -5,7 +5,6 @@ from django.db.models import Avg, Count
 from rest_framework import viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
-import pandas as pd
 
 from app.models import Comfort, Sensor, Prediction
 
@@ -125,47 +124,6 @@ class IntegrateViewSet(viewsets.ViewSet):
             return Response({label: count})
         else:
             return Response({'label_counts': label_counts})
-
-    def correlation(self, request: Request) -> Response:
-        """
-        Get the raw data for local temperature, local humidity, and comfort level.
-
-        :param request: The HTTP request.
-        :type request: rest_framework.request.Request
-        :return: The raw data for plotting.
-        :rtype: rest_framework.response.Response
-        """
-        comfort_data = Comfort.objects.all().order_by("timestamp")
-        sensor_data = Sensor.objects.all().order_by("timestamp")
-
-        data = []
-
-        for comfort in comfort_data:
-            integrate = comfort.integrate
-            comfort_level = comfort.comfort
-
-            try:
-                sensor = sensor_data.filter(
-                    integrate=comfort.integrate).latest('timestamp')
-
-                local_temp = sensor.local_temp
-                local_humid = sensor.local_humid
-
-                print(1)
-
-                data.append({
-                    'local_temp': local_temp,
-                    'local_humid': local_humid,
-                    'comfort_level': comfort_level
-                })
-            except Sensor.DoesNotExist:
-                pass
-
-        response_data = {
-            'data': data
-        }
-
-        return Response(response_data)
 
     def _get_average_comfort_level(self, comfort_data: Comfort) -> float:
         """
