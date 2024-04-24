@@ -26,7 +26,7 @@ class Comfort(AbstractModel):
         max_length=255, null=True, blank=True,
         help_text="Comfort level descriptor"
     )
-    integration = models.ForeignKey(
+    integrate = models.ForeignKey(
         Integrate, on_delete=models.CASCADE, related_name='comforts',
         null=True
     )

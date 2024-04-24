@@ -25,7 +25,7 @@ class Image(AbstractModel):
     detected_image = models.ImageField(
         upload_to='detected_images/', null=True, blank=True
     )
-    integration = models.ForeignKey(
+    integrate = models.ForeignKey(
         Integrate, on_delete=models.CASCADE, related_name='images', null=True
     )
 

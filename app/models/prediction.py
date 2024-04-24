@@ -30,7 +30,7 @@ class Prediction(AbstractModel):
         max_length=255, null=True, blank=True,
         help_text="Lower of the predicted object"
     )
-    integration = models.ForeignKey(
+    integrate = models.ForeignKey(
         Integrate, on_delete=models.CASCADE,
         related_name='predictions', null=True
     )

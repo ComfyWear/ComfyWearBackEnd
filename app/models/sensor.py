@@ -30,7 +30,7 @@ class Sensor(AbstractModel):
     local_humid = models.FloatField(
         null=True, blank=True, help_text="Local humidity reading"
     )
-    integration = models.ForeignKey(
+    integrate = models.ForeignKey(
         Integrate, on_delete=models.CASCADE, related_name='sensors',
         null=True
     )

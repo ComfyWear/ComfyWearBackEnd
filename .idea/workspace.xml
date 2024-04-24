@@ -3,18 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1b8be84c-0b65-4784-93b4-d8754718d135" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/comfort.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/comfort.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/image.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/integrate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/prediction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/sensor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_integrate.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_integrate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_resources/setup_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/test_resources/setup_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/ComfortViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/ComfortViewSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/PredictViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/PredictViewSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/SensorViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/SensorViewSet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/IntegrateViewSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/IntegrateViewSet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +111,7 @@
       <workItem from="1713669165137" duration="1666000" />
       <workItem from="1713675857605" duration="611000" />
       <workItem from="1713772476391" duration="672000" />
-      <workItem from="1713840069614" duration="10087000" />
+      <workItem from="1713840069614" duration="14537000" />
     </task>
     <servers />
   </component>
