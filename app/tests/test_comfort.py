@@ -1,4 +1,4 @@
-"""This module defines the test suite for the IntegrateViewSet."""
+"""This module defines the test suite for the IntegratViewSet."""
 from rest_framework import status
 
 from app.models import Comfort
@@ -29,7 +29,7 @@ class ComfortViewSetTestCase(BaseTestCase):
         response = self.client.post(self.comfort_url, data, format='multipart')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(Comfort.objects.count(), 0)
-        self.assertEqual(response.data['error'], 'Invalid secret code')
+        self.assertEqual(response.data['error'], 'Invalid secret code or comfort values')
 
     def test_create_comfort_with_missing_comfort_data(self):
         """Test when creating a comfort object with missing comfort data."""
