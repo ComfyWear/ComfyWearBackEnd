@@ -56,7 +56,7 @@ Follow these steps to set up the backend environment for ComfyWare:
      ```
 
 ## Testing
-   - To run the tests, run the following command:
+   - To run the tests, read the "Note" section below and run the following command:
     ```
     python manage.py test app.tests
     ```
@@ -65,3 +65,12 @@ Follow these steps to set up the backend environment for ComfyWare:
 ## API Endpoints Document
 Example endpoints:
 https://documenter.getpostman.com/view/21095095/2sA3Bj7Dax
+
+## Note
+To reduce the memory needed to store the source code, we remove all of the model's weights and let it download when we first predict things in the application. (This is the problem we faced when trying to upload the source code into ecourse).
+
+This causes the tests always fail until you download all of the model's weight. There are 2 ways you can automatically download the model's weight
+- Run `ComfyWareFrontEnd` with `ComfyWareBackEnd` and try to send the image (Just use the application like usual).
+- Or, run only `ComfyWareBackEnd` and do the post request to `app/api/predict/`. This will download all of the model's weights from Onedrive.
+
+After you get all of the model's weights. You can test the application using the above instructions.
