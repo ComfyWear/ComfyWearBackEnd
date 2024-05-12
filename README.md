@@ -39,14 +39,7 @@ Follow these steps to set up the backend environment for ComfyWare:
      ```
      pip install -r requirements.txt
      ```
-4. **Pull model's weights**
-     ```
-     git lfs install
-     git-lfs pull
-     ```
-    The `git-lfs` has a limited quota of used. In case the quota runs out. You'll have to download the `SAM` weight manually by this [link](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth) and put it in `ComfyWearBackEnd/models/weights/sam_vit_b_01ec64.pth`.
-
-5. **Environment Variables**
+4. **Environment Variables**
    - Set up your environment variables in `.env` files (This should be a secrets).
 
 ## Running the Application
