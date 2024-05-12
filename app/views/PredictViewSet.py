@@ -12,24 +12,24 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from app.models import Integrate, Prediction, Image, Sensor
-from app.serializers import PredictionSerializer, ImageSerializer, \
+from app.models import Integrate, Predict, Image, Sensor
+from app.serializers import PredictSerializer, ImageSerializer, \
     SensorSerializer, ComfortSerializer
 from models import ImageSegmentation, ComfortClassifier
 
 
 class PredictViewSet(viewsets.ViewSet):
-    """ViewSet for handling Prediction-related operations."""
+    """ViewSet for handling Predict-related operations."""
 
     parser_classes = (MultiPartParser, FormParser)
 
     def create(self, request) -> Response:
         """
-        Create a new Prediction object for a specific integrate.
+        Create a new Predict object for a specific integrate.
 
-        :param request: The HTTP request with prediction data.
+        :param request: The HTTP request with Predict data.
         :type request: rest_framework.request.Request
-        :return: Response with created prediction or error.
+        :return: Response with created Predict or error.
         :rtype: rest_framework.response.Response
         """
         secret = request.data.get('secret')
@@ -109,7 +109,7 @@ class PredictViewSet(viewsets.ViewSet):
         :type integrate: app.models.Integrate
         """
         for upper, lower in labels:
-            prediction_serializer = PredictionSerializer(
+            prediction_serializer = PredictSerializer(
                 data={'predicted_upper': upper, 'predicted_lower': lower})
             if prediction_serializer.is_valid():
                 prediction_serializer.save(integrate=integrate)
@@ -195,12 +195,12 @@ class PredictViewSet(viewsets.ViewSet):
         :return: The response data.
         :rtype: dict
         """
-        predictions = Prediction.objects.filter(integrate=integrate)
+        predictions = Predict.objects.filter(integrate=integrate)
         images = Image.objects.filter(integrate=integrate)
         sensors = Sensor.objects.filter(integrate=integrate)
 
         response_data = {
-            'predictions': PredictionSerializer(predictions, many=True).data,
+            'predictions': PredictSerializer(predictions, many=True).data,
             'images': ImageSerializer(images, many=True,
                                       context={'request': request}).data,
             'sensors': SensorSerializer(sensors, many=True).data,

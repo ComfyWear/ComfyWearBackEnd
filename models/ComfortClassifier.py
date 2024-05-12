@@ -1,25 +1,40 @@
 """The module containing the classifier for inference the comfort level."""
-import joblib
-import numpy as np
-import pandas as pd
+import os
 from typing import List, Tuple
-from sklearn.preprocessing import StandardScaler
+import joblib
+import pandas as pd
+import numpy as np
+
+from utils import check_and_download_files
 
 
 class ComfortClassifier:
-    """A comfort level classifier for inference the comfort level."""
-
+    """Classifier for inferring comfort level based on environmental."""
     def __init__(self):
-        """
-        Initialize the comfort level classifier.
+        self.model_base_path = "models/weights/"
+        check_and_download_files(self.model_base_path)
+        self.resource_path = "models/model_resources/data.csv"
+        self.columns = pd.read_csv(self.resource_path).columns[:-1]
+        self.classifier = self.load_model(os.path.join(self.model_base_path,
+                                                       "gb_model.pkl"))
+        self.scaler_temp_humid = self.load_model(os.path.join(
+            self.model_base_path, "scaler_temp_humid.pkl"))
+        self.scaler_other = self.load_model(os.path.join(self.model_base_path,
+                                                         "scaler_other.pkl"))
 
-        The classifier is a random forest classifier that is trained on a dataset containing
-        comfort level labels, clothing item labels, local temperature, and local humidity.
+    def load_model(self, path):
         """
-        self.columns = pd.read_csv("models/model_resources/data.csv").columns[:-1]
-        self.classifier = joblib.load("models/weights/gb_model.pkl")
-        self.scaler_temp_humid = joblib.load("models/weights/scaler_temp_humid.pkl")
-        self.scaler_other = joblib.load("models/weights/scaler_other.pkl")
+        Load a joblib model file with error handling for compatibility issues.
+        """
+        try:
+            return joblib.load(path)
+        except KeyError as e:
+            print(f"Failed to load the model due to a KeyError: {e}. "
+                  "This might be caused by a Python version mismatch.")
+            raise
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            raise
 
     def predict_comfort_level(self, labels: List[Tuple], local_temp: float,
                               local_humid: float) -> list:

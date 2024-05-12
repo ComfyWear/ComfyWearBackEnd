@@ -1,7 +1,7 @@
 """This module defines the test suite for the IntegratenViewSet."""
 from rest_framework import status
 
-from app.models import Comfort, Sensor, Prediction, Integrate
+from app.models import Comfort, Sensor, Predict, Integrate
 from app.tests import BaseTestCase
 
 
@@ -38,12 +38,12 @@ class IntegrateViewSetTestCase(BaseTestCase):
                                              local_humid=65.0,
                                              integrate=self.integrate)
 
-        self.prediction1 = Prediction.objects.create(
+        self.prediction1 = Predict.objects.create(
             predicted_upper='T-shirt',
             predicted_lower='Shorts',
             integrate=self.integrate,
             timestamp='2023-06-01T10:00:00Z')
-        self.prediction2 = Prediction.objects.create(
+        self.prediction2 = Predict.objects.create(
             predicted_upper='Jacket',
             predicted_lower='Jeans',
             integrate=self.integrate,
@@ -137,7 +137,7 @@ class IntegrateViewSetTestCase(BaseTestCase):
         comfort level distribution, and comfort level details,
         but the clothing label counts should be empty.
         """
-        Prediction.objects.all().delete()
+        Predict.objects.all().delete()
         response = self.client.get(self.integrate_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

@@ -1,28 +1,34 @@
 """The module containing the image segmentation class."""
-import cv2
+import os
 import numpy as np
+
+import cv2
 import supervision as sv
 from segment_anything import sam_model_registry, SamPredictor
 from ultralytics import YOLO
+
+from utils import check_and_download_files
 
 
 class ImageSegmentation:
     """
     The ImageSegmentation class is responsible for segmenting the image.
-
     The class uses the YOLO model to detect the clothing items in the image.
     The detected clothing items are then segmented using the SAM model.
     """
 
     def __init__(self):
         """Initialize the ImageSegmentation class."""
-        self.model = YOLO("models/weights/best.pt")
-        self.pp_model = YOLO("models/weights/yolov9c.pt")
+        self.model_base_path = "models/weights/"
+        check_and_download_files(self.model_base_path)
+        self.model = YOLO(os.path.join(self.model_base_path, "best.pt"))
+        self.pp_model = YOLO(os.path.join(self.model_base_path, "yolov9c.pt"))
         self.device = "cpu"
-        self.checkpoint_path = "models/weights/sam_vit_b_01ec64.pth"
+        self.checkpoint_path = os.path.join(self.model_base_path,
+                                            "sam_vit_b_01ec64.pth")
         self.model_type = "vit_b"
         self.sam = sam_model_registry[self.model_type](
-            checkpoint=self.checkpoint_path).to(device=self.device)
+            checkpoint=self.checkpoint_path).to(self.device)
         self.mask_predictor = SamPredictor(self.sam)
         self.box_annotator = sv.BoundingBoxAnnotator(
             color=sv.Color.YELLOW,
@@ -33,6 +39,7 @@ class ImageSegmentation:
             text_position=sv.Position.CENTER,
             color_lookup=sv.ColorLookup.INDEX)
         self.corner_annotator = sv.BoxCornerAnnotator(color=sv.Color.GREEN)
+
 
     def segment_image(self, image_path: str) -> tuple:
         """

@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from app.models import Comfort, Sensor, Prediction
+from app.models import Comfort, Sensor, Predict
 
 
 class IntegrateViewSet(viewsets.ViewSet):
@@ -180,7 +180,7 @@ class IntegrateViewSet(viewsets.ViewSet):
                     'humidities': []
                 }
 
-                predictions = Prediction.objects.filter(
+                predictions = Predict.objects.filter(
                     integrate=integrate).order_by('timestamp')
                 for prediction in predictions:
                     integrate_data[integrate]['upper_labels'].append(
@@ -269,9 +269,9 @@ class IntegrateViewSet(viewsets.ViewSet):
         :return: The clothing label counts.
         :rtype: Dict[str, int]
         """
-        upper_labels = Prediction.objects.values_list('predicted_upper',
+        upper_labels = Predict.objects.values_list('predicted_upper',
                                                       flat=True)
-        lower_labels = Prediction.objects.values_list('predicted_lower',
+        lower_labels = Predict.objects.values_list('predicted_lower',
                                                       flat=True)
         all_labels = list(upper_labels) + list(lower_labels)
         label_counts = {}
