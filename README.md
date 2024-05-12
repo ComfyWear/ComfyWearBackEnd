@@ -54,6 +54,7 @@ Follow these steps to set up the backend environment for ComfyWare:
      ```
      python manage.py runserver
      ```
+     This going to take some time when you do the first prediction (It is downloading the model's weights).
 
 ## Testing
    - To run the tests, read the "Note" section below and run the following command:
