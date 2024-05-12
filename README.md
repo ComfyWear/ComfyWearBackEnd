@@ -1,5 +1,5 @@
 # ComfyWearBackEnd
-
+[![Django CI](https://github.com/ComfyWear/ComfyWearBackEnd/actions/workflows/django.yml/badge.svg)](https://github.com/ComfyWear/ComfyWearBackEnd/actions/workflows/django.yml)
 ## Technology Stack
 - Django REST Framework
 - Sqlite3
